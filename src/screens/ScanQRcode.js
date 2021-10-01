@@ -55,9 +55,7 @@ function ScanQRcode({ navigation }) {
         {
           text: "네",
           onPress: () => {
-            console.log("OK Pressed"),
-              navigation.navigate("TakingPharmData"),
-              setScanned(false);
+            console.log("OK Pressed"), navigation.navigate("TakingPharmData");
           },
         },
       ]

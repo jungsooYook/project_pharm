@@ -16,11 +16,11 @@ import { useSelector } from "react-redux";
 const Tab = createBottomTabNavigator();
 
 function TabIcon_MaterialCommunityIcons({ name, size, color }) {
-  return <MaterialCommunityIcons name={name} size={30} color={color} />;
+  return <MaterialCommunityIcons name={name} size={25} color={color} />;
 }
 
 function TabIcon_Awesome5({ name, size, color }) {
-  return <FontAwesome5 name={name} size={30} color={color} />;
+  return <FontAwesome5 name={name} size={26} color={color} />;
 }
 
 function MainTab({ navigation }) {

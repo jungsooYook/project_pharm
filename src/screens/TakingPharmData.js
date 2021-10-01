@@ -70,16 +70,20 @@ function TakingPharmData({ navigation }) {
 
   // remove button press function
   function _removePress() {
-    Alert.alert("경고!", "정말 삭제하시겠습니까?", [
-      {
-        text: "아니요",
-        onPress: () => {},
-      },
-      {
-        text: "네",
-        onPress: () => {},
-      },
-    ]);
+    Alert.alert(
+      "정말 삭제하시겠습니까?",
+      "삭제시 복구 불가능하니 신중히 선택바랍니다.",
+      [
+        {
+          text: "아니요",
+          onPress: () => {},
+        },
+        {
+          text: "네",
+          onPress: () => {},
+        },
+      ]
+    );
   }
 
   return (
@@ -91,7 +95,7 @@ function TakingPharmData({ navigation }) {
         <PharmDataContent
           PharmName={PharmNameset(name)}
           namePress={() => navigation.navigate("PharmDetailed")}
-          removePress={() => navigation.navigate("PharmDetailed")}
+          removePress={_removePress}
         />
 
         {/* <Content>{name}</Content>
