@@ -17,15 +17,14 @@ const Container = styled.View`
   height: 50px
 `;
 
-const NameContainer = styled.TouchableOpacity`
-  flex: 6;
+const NmaeContainer = styled.TouchableOpacity`
+  flex: 5;
   justify-content: center;
   align-self: center
   align-items: flex-start;
-  padding-left: 20px;
+  padding-left: 45px;
   padding-right: 40px
-  padding-top: 10px;
-  padding-bottom: 5px
+  padding-top: 9px;
 `;
 
 const IconContainer = styled.TouchableOpacity`
@@ -36,20 +35,18 @@ const IconContainer = styled.TouchableOpacity`
 `;
 
 const Content = styled.Text`
-  flex:1
+  flex:0.9
   font-size: 20px;
   color: black;
-  margin-left:0
-  padding-left:0
 
 `;
 
 const PharmDataContent = ({ PharmName, namePress, removePress }) => {
   return (
     <Container>
-      <NameContainer onPress={namePress}>
+      <NmaeContainer onPress={namePress}>
         <Content>{PharmName}</Content>
-      </NameContainer>
+      </NmaeContainer>
       <IconContainer onPress={removePress}>
         <FontAwesome5 name="trash-alt" size={26} color="black" />
       </IconContainer>

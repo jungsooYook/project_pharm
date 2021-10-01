@@ -9,6 +9,7 @@ function DrungInfomation(state = initialState, action) {
         howToStore: action.howToStore,
         howMuch: action.howMuch,
         mainIngredient: action.mainIngredient,
+        time: action.time,
       };
     default:
       return state;
@@ -20,5 +21,6 @@ const initialState = {
   howToStore: "",
   howMuch: "",
   mainIngredient: "",
+  time: "",
 };
 export { DrungInfomation, initialState };

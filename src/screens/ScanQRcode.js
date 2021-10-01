@@ -56,7 +56,7 @@ function ScanQRcode({ navigation }) {
           text: "네",
           onPress: () => {
             console.log("OK Pressed"),
-              navigation.navigate("Info"),
+              navigation.navigate("TakingPharmData"),
               setScanned(false);
           },
         },
@@ -84,9 +84,16 @@ function ScanQRcode({ navigation }) {
             "]"
           );
           const mainIngredient = myJson.body.items[0].MAIN_ITEM_INGR;
+          const time = Date.now().toString();
 
           dispatch(
-            DrugInformationAction(name, howToStore, howMuch, mainIngredient)
+            DrugInformationAction(
+              name,
+              howToStore,
+              howMuch,
+              mainIngredient,
+              time
+            )
           );
 
           return CheckDrugAlert(name);
