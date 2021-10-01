@@ -124,7 +124,8 @@ function ScanQRcode({ navigation }) {
 
   ///scan data function
   const handleBarCodeScanned = ({ type, data }) => {
-    const editedData = type === 16 ? data.replace("010", "") : data;
+    const index = data.indexOf("8806");
+    const editedData = data.substring(index, index + 13);
     setScanned(true);
     SearchDrugByBarCode(editedData);
     console.log(`### ${type} \n${editedData} ###`);
