@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AddDrugInfo } from "../actions";
 import OverlayView from "../components/OverlayView";
 import { EditPharmData, EditPharmName } from "../util";
+import seceret from "../seceret.json";
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -64,7 +65,7 @@ function ScanQRcode({ navigation }) {
   const SearchDrugByBarCode = async (editedData) => {
     try {
       await fetch(
-        `http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService1/getMdcinPrductItem?serviceKey=4ARJOwbLh8jufyYInZFDNEp0phIdsR0d7ZZP0bqJKwTfQ3cL%2BDf7zJWkSnYAk%2B8%2BjCjn%2FV9RLSxZ2vNFQ%2BYHrQ%3D%3D&bar_code=${editedData}&type=json`
+        `http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService1/getMdcinPrductItem?serviceKey=${seceret.pharm_service_key}&bar_code=${editedData}&type=json`
       )
         .then((response) => {
           return response.json();
