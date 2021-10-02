@@ -53,8 +53,8 @@ function ScanQRcode({ navigation }) {
           text: "네",
           onPress: () => {
             console.log("OK Pressed");
-            navigation.navigate("TakingPharmData");
             dispatch(AddDrugInfo(drugInfo));
+            setScanned(false);
           },
         },
       ]

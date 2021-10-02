@@ -1,9 +1,10 @@
 import React from "react";
-import { TouchableOpacity, Dimensions, Alert } from "react-native";
+import { Dimensions, Alert } from "react-native";
 import { RemoveDrugInfo } from "../actions";
 import styled from "styled-components/native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
+import { NavigationContainer } from "@react-navigation/native";
 
 const width = Dimensions.get("window").width;
 
@@ -16,7 +17,8 @@ const Container = styled.View`
   background-color: ${({ theme }) => theme.pharmDataContent}
   border-radius: 10px;
   width: ${width - 70}px;
-  height: 50px
+  height: 50px;
+  margin-bottom:2px
 `;
 
 const NmaeContainer = styled.TouchableOpacity`
@@ -43,7 +45,7 @@ const Content = styled.Text`
 
 `;
 
-const PharmDataContent = ({ namePress, drugInfo }) => {
+const PharmDataContent = ({ drugInfo, namePress }) => {
   const dispatch = useDispatch();
   const { id, name } = drugInfo;
 

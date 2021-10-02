@@ -14,11 +14,14 @@ const Container = styled.SafeAreaView`
 const List = styled.ScrollView`
   flex: 1;
   padding-left: 20px;
+  padding-right: 20px;
 `;
 
 const Title = styled.Text`
   font-size: 30px;
   font-weight: bold
+  padding-top:11px
+  padding-bottom: 30px
   color: ${({ theme }) => theme.title};
 `;
 
@@ -28,7 +31,7 @@ function Setting() {
 
   return (
     <Container>
-      <Title>Setting</Title>
+      <Title>환경설정</Title>
       <List width={width - 10}>
         <DarkModeButton content="다크모드 활성화" />
         <ScanVibrationButton content="스캔시 진동 활성화" />

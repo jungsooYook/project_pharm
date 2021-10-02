@@ -18,11 +18,15 @@ const Title = styled.Text`
   font-size: 30px;
   font-weight: bold;
   color: ${({ theme }) => theme.title};
+  padding-top: 9px;
 `;
 
 const List = styled.ScrollView`
   flex: 1;
-  padding: 15px 10px;
+  padding-top: 15px;
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-bottom: 0;
 `;
 
 const Content = styled.Text`
@@ -30,14 +34,6 @@ const Content = styled.Text`
   color: white;
   padding: 7px 0;
   padding-bottom: 30px
-`;
-
-const SemiTitle = styled.Text`
-  font-size: 25px;
-  font-weight: bold;
-  padding-bottom:10px
-  align-self: center
-  color: ${({ theme }) => theme.semititle};
 `;
 
 // function start
@@ -57,8 +53,11 @@ function TakingPharmData({ navigation }) {
           drugInfos.map((drugInfo) => (
             <PharmDataContent
               key={drugInfo.id}
-              onPress={() => {}}
               drugInfo={drugInfo}
+              navigation={navigation}
+              namePress={() =>
+                navigation.navigate("PharmDetailed", { drugInfo })
+              }
             />
           ))}
       </List>
