@@ -19,18 +19,7 @@ And there is a bulletin board for various drugs, so patients can share side effe
 
 ## Installation
 
-<!-- OS X & Linux:
-
-```sh
-npm install my-crazy-module --save
-```
-
-Windows:
-
-```sh
-edit autoexec.bat
-```
- -->
+구글 스토어에 이게 뭐약 검색!
 
 ## Usage example
 
