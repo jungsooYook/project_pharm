@@ -17,12 +17,17 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false,
+      "bundleIdentifier": "com.project_pharm.codepam",
+      "buildNumber": "1.0.0"
     },
     "android": {
+      "package": "com.project_pharm.codepam",
+      "versionCode": 1,
+      "permissions": ["CAMERA", "VIBRATE"],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#292a35"
       }
     },
     "web": {
