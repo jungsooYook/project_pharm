@@ -1,26 +1,15 @@
-function DrungInfomation(state = initialState, action) {
-  const DRUGINFORMATIONACTION = "DRUGINFORMATIONACTION";
-
+function DrugInfomation(state = [], action) {
   switch (action.type) {
-    case DRUGINFORMATIONACTION:
-      return {
-        ...state,
-        name: action.name,
-        howToStore: action.howToStore,
-        howMuch: action.howMuch,
-        mainIngredient: action.mainIngredient,
-        time: action.time,
-      };
+    case "ADD_DRUGINFO":
+      return [action.drugInfo, ...state];
+
+    case "REMOVE_DRUGINFO":
+      nextState = state.filter((drugInfo) => drugInfo.id !== action.id);
+      return nextState;
+
     default:
       return state;
   }
 }
 
-const initialState = {
-  name: "",
-  howToStore: "",
-  howMuch: "",
-  mainIngredient: "",
-  time: "",
-};
-export { DrungInfomation, initialState };
+export { DrugInfomation };

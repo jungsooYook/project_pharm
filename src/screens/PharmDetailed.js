@@ -32,7 +32,7 @@ const List = styled.ScrollView`
 
 const Content = styled.Text`
   font-size: 20px
-  color: white;
+  color: ${({ theme }) => theme.text};
   padding: 7px 0;
   padding-bottom: 30px
 `;

@@ -1,9 +1,9 @@
 import { createStore, combineReducers } from "redux";
-import { DrungInfomation } from "./reducers/DrugInformation";
+import { DrugInfomation } from "./reducers/DrugInformation";
 import { SettingInfo } from "./reducers/SettingInfo";
 
 const reducers = combineReducers({
-  drugInfo: DrungInfomation,
+  drugInfo: DrugInfomation,
   settingInfo: SettingInfo,
 });
 

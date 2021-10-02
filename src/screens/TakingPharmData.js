@@ -1,10 +1,8 @@
 import React from "react";
 import styled from "styled-components/native";
-import { Button } from "react-native";
 import { useSelector } from "react-redux";
 import PharmDataContent from "../components/PharmDataContent";
 import { Alert } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
 
 const Container = styled.SafeAreaView`
   justify-content: flex-start;
@@ -42,71 +40,27 @@ const SemiTitle = styled.Text`
   color: ${({ theme }) => theme.semititle};
 `;
 
-const sample =
-  '<DOC title="용법용량" type="UD">\r\n  <SECTION title="">\r\n    <ARTICLE title="">\r\n      <PARAGRAPH tagName="p" textIndent="0" marginLeft="0"><![CDATA[만 12세 이상 소아 및 성인:]]></PARAGRAPH>\r\n      <PARAGRAPH tagName="p" textIndent="0" marginLeft="0"><![CDATA[1회 1~2정씩 1일 3-4회 (4-6시간 마다) 필요시 복용한다.]]></PARAGRAPH>\r\n      <PARAGRAPH tagName="p" textIndent="0" marginLeft="0"><![CDATA[1일 최대 4그램 (8정)을 초과하여 복용하지 않는다.]]></PARAGRAPH>\r\n      <PARAGRAPH tagName="p" textIndent="0" marginLeft="0"><![CDATA[이 약은 가능한 최단기간동안 최소 유효용량으로 복용한다.]]></PARAGRAPH>\r\n    </ARTICLE>\r\n  </SECTION>\r\n</DOC>';
-
+// function start
 function TakingPharmData({ navigation }) {
-  const { name, howToStore, mainIngredient, howMuch, time } = useSelector(
-    (state) => {
-      return {
-        name: state.drugInfo.name,
-        howToStore: state.drugInfo.howToStore,
-        mainIngredient: state.drugInfo.mainIngredient,
-        howMuch: state.drugInfo.howMuch,
-        time: state.drugInfo.time,
-      };
-    }
-  );
+  const drugInfos = useSelector((state) => {
+    return state.drugInfo;
+  });
 
-  console.log(time);
-
-  function PharmNameset(data) {
-    if (data.length >= 10) {
-      return `${data.substring(0, 10)}...`;
-    } else {
-      return data;
-    }
-  }
-
+  console.log(`@@@PharmData : drugInfo[0].name@@@`);
   // remove button press function
-  function _removePress() {
-    Alert.alert(
-      "정말 삭제하시겠습니까?",
-      "삭제시 복구 불가능하니 신중히 선택바랍니다.",
-      [
-        {
-          text: "아니요",
-          onPress: () => {},
-        },
-        {
-          text: "네",
-          onPress: () => {},
-        },
-      ]
-    );
-  }
 
   return (
     <Container>
       <Title>복용중인 약물</Title>
       <List>
-        <SemiTitle>약물명</SemiTitle>
-        <PharmDataContent PharmName={"옥동자 메가톤"} removePress={() => {}} />
-        <PharmDataContent
-          PharmName={PharmNameset(name)}
-          namePress={() => navigation.navigate("PharmDetailed")}
-          removePress={_removePress}
-        />
-
-        {/* <Content>{name}</Content>
-        <SemiTitle>보관방법</SemiTitle>
-        <Content>{howToStore}</Content>
-        <SemiTitle>약물명</SemiTitle>
-        <Content>{mainIngredient}</Content>
-        <SemiTitle>용법 및 용량</SemiTitle>
-        <Content>{EditData(howMuch, `[CDATA[`, `]`)}</Content>
-        <SemiTitle>유통기한</SemiTitle>
-        <Content>2323</Content> */}
+        {drugInfos &&
+          drugInfos.map((drugInfo) => (
+            <PharmDataContent
+              key={drugInfo.id}
+              onPress={() => {}}
+              drugInfo={drugInfo}
+            />
+          ))}
       </List>
     </Container>
   );

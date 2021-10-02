@@ -1,14 +1,19 @@
-export const DrugInformationAction = (
-  name,
-  howToStore,
-  howMuch,
-  mainIngredient,
-  time
-) => ({
-  type: "DRUGINFORMATIONACTION",
-  name,
-  howToStore,
-  howMuch,
-  mainIngredient,
-  time,
-});
+export const AddDrugInfo = (drugInfo) => {
+  return {
+    type: "ADD_DRUGINFO",
+    drugInfo: {
+      id: drugInfo.id,
+      name: drugInfo.name,
+      howToStore: drugInfo.howToStore,
+      howMuch: drugInfo.howMuch,
+      mainINGR: drugInfo.mainINGR,
+    },
+  };
+};
+
+export const RemoveDrugInfo = (id) => {
+  return {
+    type: "REMOVE_DRUGINFO",
+    id,
+  };
+};

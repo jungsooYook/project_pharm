@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Text, Alert, Vibration, Dimensions } from "react-native";
 import styled from "styled-components/native";
 import { BarCodeScanner } from "expo-barcode-scanner";
-
 import ResetButton from "../components/ResetButton";
 import { useDispatch, useSelector } from "react-redux";
-import { DrugInformationAction } from "../actions/DrugInformationAction";
+import { AddDrugInfo } from "../actions";
 import OverlayView from "../components/OverlayView";
 import { EditPharmData, EditPharmName } from "../util";
 
@@ -35,10 +34,7 @@ function ScanQRcode({ navigation }) {
   });
 
   // check drug alert function
-  function CheckDrugAlert(item) {
-    console.log(
-      "########################################## \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
-    );
+  function CheckDrugAlert(item, drugInfo) {
     Alert.alert(
       "복용 약물이 아래 내용이 맞습니까?",
       `복약 시간: ${timestamp()}
@@ -55,7 +51,9 @@ function ScanQRcode({ navigation }) {
         {
           text: "네",
           onPress: () => {
-            console.log("OK Pressed"), navigation.navigate("TakingPharmData");
+            console.log("OK Pressed");
+            navigation.navigate("TakingPharmData");
+            dispatch(AddDrugInfo(drugInfo));
           },
         },
       ]
@@ -64,8 +62,6 @@ function ScanQRcode({ navigation }) {
 
   // search barcode function
   const SearchDrugByBarCode = async (editedData) => {
-    Vibration.vibrate(vibration ? 200 : 0);
-
     try {
       await fetch(
         `http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService1/getMdcinPrductItem?serviceKey=4ARJOwbLh8jufyYInZFDNEp0phIdsR0d7ZZP0bqJKwTfQ3cL%2BDf7zJWkSnYAk%2B8%2BjCjn%2FV9RLSxZ2vNFQ%2BYHrQ%3D%3D&bar_code=${editedData}&type=json`
@@ -81,20 +77,20 @@ function ScanQRcode({ navigation }) {
             "[CDATA[",
             "]"
           );
-          const mainIngredient = myJson.body.items[0].MAIN_ITEM_INGR;
-          const time = Date.now().toString();
+          const mainINGR = myJson.body.items[0].MAIN_ITEM_INGR;
+          const id = Date.now().toString();
 
-          dispatch(
-            DrugInformationAction(
-              name,
-              howToStore,
-              howMuch,
-              mainIngredient,
-              time
-            )
-          );
+          const drugInfo = {
+            name: name,
+            howToStore: howToStore,
+            howMuch: howMuch,
+            mainINGR: mainINGR,
+            id: id,
+          };
 
-          return CheckDrugAlert(name);
+          console.log(drugInfo);
+
+          return CheckDrugAlert(name, drugInfo);
         });
     } catch (e) {
       console.log(e.message);
@@ -122,11 +118,13 @@ function ScanQRcode({ navigation }) {
 
   ///scan data function
   const handleBarCodeScanned = ({ type, data }) => {
+    Vibration.vibrate(vibration ? 200 : 0);
+
     const index = data.indexOf("8806");
     const editedData = data.substring(index, index + 13);
-    setScanned(true);
     SearchDrugByBarCode(editedData);
     console.log(`### ${type} \n${editedData} ###`);
+    setScanned(true);
   };
 
   if (hasPermission === null) {
