@@ -80,6 +80,7 @@ function ScanQRcode({ navigation }) {
           );
           const mainINGR = myJson.body.items[0].MAIN_ITEM_INGR;
           const id = Date.now().toString();
+          const time = Date();
 
           const drugInfo = {
             name: name,
@@ -87,6 +88,7 @@ function ScanQRcode({ navigation }) {
             howMuch: howMuch,
             mainINGR: mainINGR,
             id: id,
+            time: time,
           };
 
           console.log(drugInfo);

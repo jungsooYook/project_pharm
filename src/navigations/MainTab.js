@@ -53,7 +53,11 @@ function MainTab({ navigation }) {
         component={BulletinBoard}
         options={{
           headerShown: false,
-          tabBarIcon: (icon) => TabIcon_Awesome5({ ...icon, name: "list-alt" }),
+          tabBarIcon: (icon) =>
+            TabIcon_MaterialCommunityIcons({
+              ...icon,
+              name: "clipboard-list-outline",
+            }),
         }}
       />
       <Tab.Screen

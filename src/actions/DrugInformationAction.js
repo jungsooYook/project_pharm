@@ -7,6 +7,7 @@ export const AddDrugInfo = (drugInfo) => {
       howToStore: drugInfo.howToStore,
       howMuch: drugInfo.howMuch,
       mainINGR: drugInfo.mainINGR,
+      time: drugInfo.time,
     },
   };
 };
