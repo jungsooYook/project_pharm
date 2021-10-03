@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AddDrugInfo } from "../actions";
 import OverlayView from "../components/OverlayView";
 import { EditPharmData, EditPharmName } from "../util";
-import seceret from "../seceret.json";
+import seceret from "../data/seceret.json";
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -26,7 +26,6 @@ function timestamp() {
 function ScanQRcode({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
-  const [barcode, setBarcode] = useState("");
 
   const width = Dimensions.get("window").width;
   const dispatch = useDispatch();
@@ -82,6 +81,7 @@ function ScanQRcode({ navigation }) {
           );
           const mainINGR = myJson.body.items[0].MAIN_ITEM_INGR;
           const id = Date.now().toString();
+          const seqcode = myJson.body.items[0].ITEM_SEQ;
           const time = Date();
 
           const drugInfo = {
@@ -92,6 +92,7 @@ function ScanQRcode({ navigation }) {
             id: id,
             time: time,
             barcode: editedData,
+            seqcode: seqcode,
           };
 
           return CheckDrugAlert(name, drugInfo);
