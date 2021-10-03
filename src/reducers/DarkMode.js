@@ -1,8 +1,6 @@
 function DarkMode(state = initialState, action) {
-  const DARKMODE = "DARKMODE";
-
   switch (action.type) {
-    case DARKMODE:
+    case "DARKMODE":
       return {
         ...state,
         darkmode: !state.darkmode,

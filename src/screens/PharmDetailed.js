@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { Image, Dimensions, Alert } from "react-native";
+import { Image, Dimensions, Alert, StyleSheet } from "react-native";
 import styled from "styled-components/native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { PharmDataContent } from "../components";
@@ -47,6 +47,13 @@ function PharmDetailed({ route, navigation }) {
   const width = Dimensions.get("window").width;
   const seqcode = drugInfo.seqcode;
 
+  const { bigTextMode, darkmode } = useSelector((state) => {
+    return {
+      bigTextMode: state.settingInfo.bigTextMode,
+      darkmode: state.settingInfo.darkmode,
+    };
+  });
+
   const SearchDrugImage = async (seqcode) => {
     try {
       await fetch(
@@ -65,35 +72,64 @@ function PharmDetailed({ route, navigation }) {
 
   SearchDrugImage(seqcode);
 
-  return (
-    <Container>
-      <List>
-        <Image
-          style={{
-            height: (width * 0.8) / 1.832157,
-            width: width * 0.8,
-            alignSelf: "center",
-            paddingBottom: 50,
-          }}
-          source={{
-            uri: url,
-          }}
-        />
-        <SemiTitle>약물명</SemiTitle>
-        <Content>{drugInfo.name}</Content>
-        <SemiTitle>바코드</SemiTitle>
-        <Content>{drugInfo.barcode}</Content>
-        <Content>{drugInfo.seqcode}</Content>
-        <SemiTitle>저장 방법</SemiTitle>
-        <Content>{drugInfo.howToStore}</Content>
-        <SemiTitle>주성분</SemiTitle>
-        <Content>{drugInfo.mainINGR}</Content>
-        <SemiTitle>복용방법 및 섭취량</SemiTitle>
-        <Content>{drugInfo.howMuch}</Content>
-        <SemiTitle>복용방법 및 섭취량</SemiTitle>
-      </List>
-    </Container>
-  );
+  const styles = StyleSheet.create({
+    text: {
+      fontSize: bigTextMode ? 30 : 20,
+    },
+    semiTitle: {
+      fontSize: bigTextMode ? 35 : 25,
+    },
+  });
+
+  if (url !== "") {
+    return (
+      <Container>
+        <List>
+          <Image
+            style={{
+              height: (width * 0.8) / 1.832157,
+              width: width * 0.8,
+              alignSelf: "center",
+              marginBottom: 30,
+            }}
+            source={{
+              uri: url,
+            }}
+          />
+          <SemiTitle style={styles.semiTitle}>약물명</SemiTitle>
+          <Content style={styles.text}>{drugInfo.name}</Content>
+          <SemiTitle style={styles.semiTitle}>바코드</SemiTitle>
+          <Content style={styles.text}>{drugInfo.barcode}</Content>
+          <Content style={styles.text}>{drugInfo.seqcode}</Content>
+          <SemiTitle style={styles.semiTitle}>저장 방법</SemiTitle>
+          <Content style={styles.text}>{drugInfo.howToStore}</Content>
+          <SemiTitle style={styles.semiTitle}>주성분</SemiTitle>
+          <Content style={styles.text}>{drugInfo.mainINGR}</Content>
+          <SemiTitle style={styles.semiTitle}>복용방법 및 섭취량</SemiTitle>
+          <Content style={styles.text}>{drugInfo.howMuch}</Content>
+        </List>
+      </Container>
+    );
+  } else {
+    return (
+      <Container>
+        <List>
+          <SemiTitle>약물명</SemiTitle>
+          <Content>{drugInfo.name}</Content>
+          <SemiTitle>바코드</SemiTitle>
+          <Content>{drugInfo.barcode}</Content>
+          <Content>{drugInfo.seqcode}</Content>
+          <SemiTitle>저장 방법</SemiTitle>
+          <Content>{drugInfo.howToStore}</Content>
+          <SemiTitle>주성분</SemiTitle>
+          <Content>{drugInfo.mainINGR}</Content>
+          <SemiTitle>복용방법 및 섭취량</SemiTitle>
+          <Content>{drugInfo.howMuch}</Content>
+          <SemiTitle>복용방법 및 섭취량</SemiTitle>
+        </List>
+      </Container>
+    );
+  }
 }
 
 export default PharmDetailed;

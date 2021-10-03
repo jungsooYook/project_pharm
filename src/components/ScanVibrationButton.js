@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components/native";
 import { Switch } from "react-native";
-import { DarkModeAction } from "../actions/DarkModeAction";
 import { useDispatch, useSelector } from "react-redux";
 import { dark, light } from "../theme";
 import { ScanVibrationAction } from "../actions";
@@ -35,10 +34,11 @@ function ScanVibrationButton({ content }) {
   }
 
   // darkmode redux
-  const { vibration, darkmode } = useSelector((state) => {
+  const { vibration, darkmode, bigTextMode } = useSelector((state) => {
     return {
       vibration: state.settingInfo.vibration,
       darkmode: state.settingInfo.darkmode,
+      bigTextMode: state.settingInfo.bigTextMode,
     };
   });
 
@@ -47,7 +47,7 @@ function ScanVibrationButton({ content }) {
   ///rendering start
   return (
     <Container>
-      <Content>{content}</Content>
+      <Content style={{ fontSize: bigTextMode ? 40 : 20 }}>{content}</Content>
       <SwitchContainer>
         <Switch
           trackColor={{

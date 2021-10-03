@@ -10,14 +10,17 @@ import { useSelector } from "react-redux";
 
 const Navigation = () => {
   // darkmode redux
-  const darkmode = useSelector((state) => {
-    return state.settingInfo.darkmode;
+  const { bigTextMode, darkmode } = useSelector((state) => {
+    return {
+      bigTextMode: state.settingInfo.bigTextMode,
+      darkmode: state.settingInfo.darkmode,
+    };
   });
 
   const theme = darkmode ? dark : light;
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme} bigTextMode={bigTextMode}>
       <StatusBar
         backgroundColor={theme.background}
         barStyle={darkmode ? "light-content" : "dark-content"}

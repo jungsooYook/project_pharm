@@ -7,6 +7,12 @@ export const dark = {
   toggleBarUnactivated: "#767577",
   toggle: "#f4f3f4",
   pharmDataContent: "gray",
+  textSize: 20,
+  bigTextSize: 30,
+  titleSize: 30,
+  bigTitleSize: 40,
+  semiTitleSize: 25,
+  bigSemiTitleSize: 35,
 };
 
 export const light = {
@@ -18,4 +24,10 @@ export const light = {
   toggleBarUnactivated: "#767577",
   toggle: "#f4f3f4",
   pharmDataContent: "lightgray",
+  textSize: 20,
+  bigTextSize: 30,
+  titleSize: 30,
+  bigTitleSize: 40,
+  semiTitleSize: 25,
+  bigSemiTitleSize: 35,
 };

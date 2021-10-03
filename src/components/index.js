@@ -3,6 +3,7 @@ import OverlayView from "./OverlayView";
 import PharmDataContent from "./PharmDataContent";
 import ResetButton from "./ResetButton";
 import ScanVibrationButton from "./ScanVibrationButton";
+import BigTextMode from "./BigTextMode";
 
 export {
   DarkModeButton,
@@ -10,4 +11,5 @@ export {
   PharmDataContent,
   ResetButton,
   ScanVibrationButton,
+  BigTextMode,
 };

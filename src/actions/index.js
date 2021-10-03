@@ -1,5 +1,14 @@
 import { AddDrugInfo, RemoveDrugInfo } from "./DrugInformationAction";
-import { DarkModeAction } from "./DarkModeAction";
-import { ScanVibrationAction } from "./ScanVibrationAction";
+import {
+  DarkModeAction,
+  ScanVibrationAction,
+  BigTextModeAction,
+} from "./SettingAction";
 
-export { AddDrugInfo, RemoveDrugInfo, DarkModeAction, ScanVibrationAction };
+export {
+  AddDrugInfo,
+  RemoveDrugInfo,
+  DarkModeAction,
+  ScanVibrationAction,
+  BigTextModeAction,
+};

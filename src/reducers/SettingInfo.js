@@ -1,18 +1,23 @@
 function SettingInfo(state = initialState, action) {
-  const DARKMODE = "DARKMODE";
-  const SCANVIBRATION = "SCANVIBRATION";
-
   switch (action.type) {
-    case DARKMODE:
+    case "DARKMODE":
       return {
         ...state,
         darkmode: !state.darkmode,
       };
-    case SCANVIBRATION:
+
+    case "SCANVIBRATION":
       return {
         ...state,
         vibration: !state.vibration,
       };
+
+    case "BIGTEXTMODEACTION":
+      return {
+        ...state,
+        bigTextMode: !state.bigTextMode,
+      };
+
     default:
       return state;
   }
@@ -21,5 +26,6 @@ function SettingInfo(state = initialState, action) {
 const initialState = {
   darkmode: true,
   vibration: true,
+  bigTextMode: false,
 };
 export { SettingInfo, initialState };

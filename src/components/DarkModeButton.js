@@ -34,13 +34,16 @@ function DarkModeButton({ content }) {
     dispatch(DarkModeAction());
   }
 
-  const darkmode = useSelector((state) => {
-    return state.settingInfo.darkmode;
+  const { bigTextMode, darkmode } = useSelector((state) => {
+    return {
+      bigTextMode: state.settingInfo.bigTextMode,
+      darkmode: state.settingInfo.darkmode,
+    };
   });
   ///rendering start
   return (
     <Container>
-      <Content>{content}</Content>
+      <Content style={{ fontSize: bigTextMode ? 40 : 20 }}>{content}</Content>
       <SwitchContainer>
         <Switch
           trackColor={{

@@ -42,12 +42,19 @@ function TakingPharmData({ navigation }) {
     return state.drugInfo;
   });
 
+  const { bigTextMode, darkmode } = useSelector((state) => {
+    return {
+      bigTextMode: state.settingInfo.bigTextMode,
+      darkmode: state.settingInfo.darkmode,
+    };
+  });
+
   console.log(`@@@PharmData : drugInfo[0].name@@@`);
   // remove button press function
 
   return (
     <Container>
-      <Title>복용중인 약물</Title>
+      <Title style={{ fontSize: bigTextMode ? 40 : 30 }}>복용중인 약물</Title>
       <List>
         {drugInfos &&
           drugInfos.map((drugInfo) => (

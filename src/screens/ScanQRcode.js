@@ -82,7 +82,8 @@ function ScanQRcode({ navigation }) {
           const mainINGR = myJson.body.items[0].MAIN_ITEM_INGR;
           const id = Date.now().toString();
           const seqcode = myJson.body.items[0].ITEM_SEQ;
-          const time = Date();
+          const time = Date().toString();
+          const edicode = myJson.body.EDI_CODE;
 
           const drugInfo = {
             name: name,
@@ -93,6 +94,7 @@ function ScanQRcode({ navigation }) {
             time: time,
             barcode: editedData,
             seqcode: seqcode,
+            edicode: edicode,
           };
 
           return CheckDrugAlert(name, drugInfo);

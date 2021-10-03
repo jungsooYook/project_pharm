@@ -9,7 +9,8 @@ const EditPharmData = (data, startMark, endMark) => {
     var nextIndex = data.indexOf(startMark, startIndex + 1);
     var endMarkIndex = data.indexOf(endMark, startIndex + startMarkLength);
 
-    dataEdited += data.substring(startIndex + startMarkLength, endMarkIndex);
+    dataEdited +=
+      data.substring(startIndex + startMarkLength, endMarkIndex) + `\n`;
     index = nextIndex;
   }
   return dataEdited;

@@ -10,8 +10,11 @@ import { ThemeContext } from "styled-components";
 const Stack = createStackNavigator();
 
 const DrugStack = () => {
-  const darkmode = useSelector((state) => {
-    return state.settingInfo.darkmode;
+  const { bigTextMode, darkmode } = useSelector((state) => {
+    return {
+      bigTextMode: state.settingInfo.bigTextMode,
+      darkmode: state.settingInfo.darkmode,
+    };
   });
 
   const theme = darkmode ? dark : light;
@@ -33,7 +36,7 @@ const DrugStack = () => {
           headerTitleAlign: "center",
           headerTitleStyle: {
             color: theme.title,
-            fontSize: 30,
+            fontSize: bigTextMode ? 40 : 30,
             fontWeight: "bold",
           },
           headerTintColor: theme.text,
