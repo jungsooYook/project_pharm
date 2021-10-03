@@ -18,11 +18,11 @@
     ],
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.project_pharm.codepam",
+      "bundleIdentifier": "com.codepam.project_pharm",
       "buildNumber": "1.0.0"
     },
     "android": {
-      "package": "com.project_pharm.codepam",
+      "package": "com.codepam.project_pharm",
       "versionCode": 1,
       "permissions": ["CAMERA", "VIBRATE"],
       "adaptiveIcon": {
