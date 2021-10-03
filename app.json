@@ -1,42 +1,3 @@
-<<<<<<< Updated upstream
-{
-  "expo": {
-    "name": "이게뭐약?",
-    "slug": "project_pharm",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": false,
-      "bundleIdentifier": "com.codepam2020.project_pharm",
-      "buildNumber": "1.0.0"
-    },
-    "android": {
-      "package": "com.codepam2020.project_pharm",
-      "versionCode": 1,
-      "permissions": ["CAMERA", "VIBRATE"],
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#292a35"
-      }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    }
-  }
-}
-=======
 {
   "expo": {
     "name": "이게뭐약?",
@@ -74,4 +35,3 @@
     }
   }
 }
->>>>>>> Stashed changes
