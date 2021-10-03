@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Alert, Vibration, Dimensions, Text } from "react-native";
 import styled from "styled-components/native";
-import data from "../data/choco.json";
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -23,7 +22,7 @@ const BulletinBoard = () => {
   return (
     <Container>
       <Content>데이터 어떻게 불러오냐...</Content>
-      <Content>{data[0]}</Content>
+      <Content>123123</Content>
     </Container>
   );
 };
