@@ -8,6 +8,7 @@ export const AddDrugInfo = (drugInfo) => {
       howMuch: drugInfo.howMuch,
       mainINGR: drugInfo.mainINGR,
       time: drugInfo.time,
+      barcode: drugInfo.barcode,
     },
   };
 };

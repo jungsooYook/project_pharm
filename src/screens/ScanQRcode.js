@@ -26,6 +26,8 @@ function timestamp() {
 function ScanQRcode({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
+  const [barcode, setBarcode] = useState("");
+
   const width = Dimensions.get("window").width;
   const dispatch = useDispatch();
 
@@ -89,9 +91,8 @@ function ScanQRcode({ navigation }) {
             mainINGR: mainINGR,
             id: id,
             time: time,
+            barcode: editedData,
           };
-
-          console.log(drugInfo);
 
           return CheckDrugAlert(name, drugInfo);
         });
@@ -123,10 +124,10 @@ function ScanQRcode({ navigation }) {
   const handleBarCodeScanned = ({ type, data }) => {
     Vibration.vibrate(vibration ? 200 : 0);
 
-    const index = data.indexOf("8806");
-    const editedData = data.substring(index, index + 13);
+    var index = data.indexOf("8806");
+    var editedData = data.substring(index, index + 13);
     SearchDrugByBarCode(editedData);
-    console.log(`### ${type} \n${editedData} ###`);
+    console.log(`###\n${type}\n${editedData}\n###`);
     setScanned(true);
   };
 
