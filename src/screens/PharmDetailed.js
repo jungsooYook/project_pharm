@@ -42,11 +42,7 @@ const SemiTitle = styled.Text`
 
 function PharmDetailed({ route, navigation }) {
   const [url, setUrl] = useState("");
-<<<<<<< Updated upstream
   const [Stdcode, setStdcode] = useState("");
-=======
-  const [Stdcode, setStdCode] = useState("");
->>>>>>> Stashed changes
   var { drugInfo } = route.params;
   const width = Dimensions.get("window").width;
   const seqcode = drugInfo.seqcode;
@@ -77,22 +73,13 @@ function PharmDetailed({ route, navigation }) {
   const SearchStdCode = async (barcode) => {
     try {
       await fetch(
-<<<<<<< Updated upstream
-        `https://test19960221.firebaseio.com/${barcode}/PreStdCode.json`
-=======
         `https://${secret.firebase_barcode_to_prestdcode_id}/8806985024404/PreStdCode.json`
->>>>>>> Stashed changes
       )
         .then((response) => {
           return response.json();
         })
-<<<<<<< Updated upstream
-        .then((StdCode) => {
-          return setStdcode(StdCode.substring(3, 12));
-=======
         .then((PreStdCode) => {
-          return setStdCode(PreStdCode.substring(3, 12));
->>>>>>> Stashed changes
+          return setStdcode(PreStdCode.substring(3, 12));
         });
     } catch (e) {
       console.log(e.message);
@@ -132,10 +119,6 @@ function PharmDetailed({ route, navigation }) {
           <Content style={styles.text}>{drugInfo.barcode}</Content>
           <Content style={styles.text}>{drugInfo.seqcode}</Content>
           <Content style={styles.text}>{Stdcode}</Content>
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
           <SemiTitle style={styles.semiTitle}>저장 방법</SemiTitle>
           <Content style={styles.text}>{drugInfo.howToStore}</Content>
           <SemiTitle style={styles.semiTitle}>주성분</SemiTitle>
