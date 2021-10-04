@@ -52,11 +52,16 @@ const Time = styled.Text`
   flex: 1;
   font-size: 15px;
   color: black;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  padding-top: 6px;
 `;
 
 const TimeContainer = styled.View`
   flex: 0.5;
   align-items: center;
+  align-self: center;
   justify-content: center;
 `;
 
@@ -153,7 +158,7 @@ const PharmDataContent = ({ drugInfo, namePress }) => {
   }
 
   function PharmNameset(data) {
-    if (width < 800) {
+    if (width < 600) {
       if (bigTextMode == true) {
         if (data.length >= 6) {
           return `${data.substring(0, 6)}..`;
@@ -163,7 +168,7 @@ const PharmDataContent = ({ drugInfo, namePress }) => {
       } else {
         if (bigTextMode == true) {
           if (data.length >= 10) {
-            return `${data.substring(0, 10)}...`;
+            return `${data.substring(0, 10)}..`;
           } else {
             return data;
           }
@@ -174,7 +179,7 @@ const PharmDataContent = ({ drugInfo, namePress }) => {
     }
 
     if (data.length >= 10) {
-      return `${data.substring(0, 10)}...`;
+      return `${data.substring(0, 10)}..`;
     } else {
       return data;
     }
