@@ -42,7 +42,7 @@ const SemiTitle = styled.Text`
 
 function PharmDetailed({ route, navigation }) {
   const [url, setUrl] = useState("");
-  const [isUrl, setIsUrl] = useState(false);
+  const [Stdcode, setStdcode] = useState("");
   var { drugInfo } = route.params;
   const width = Dimensions.get("window").width;
   const seqcode = drugInfo.seqcode;
@@ -70,6 +70,23 @@ function PharmDetailed({ route, navigation }) {
     }
   };
 
+  const SearchStdCode = async (barcode) => {
+    try {
+      await fetch(
+        `https://test19960221.firebaseio.com/${barcode}/PreStdCode.json`
+      )
+        .then((response) => {
+          return response.json();
+        })
+        .then((StdCode) => {
+          return setStdcode(StdCode.substring(3, 12));
+        });
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
+  SearchStdCode(drugInfo.barcode);
   SearchDrugImage(seqcode);
 
   const styles = StyleSheet.create({
@@ -101,6 +118,7 @@ function PharmDetailed({ route, navigation }) {
           <SemiTitle style={styles.semiTitle}>바코드</SemiTitle>
           <Content style={styles.text}>{drugInfo.barcode}</Content>
           <Content style={styles.text}>{drugInfo.seqcode}</Content>
+          <Content style={styles.text}>{Stdcode}</Content>
           <SemiTitle style={styles.semiTitle}>저장 방법</SemiTitle>
           <Content style={styles.text}>{drugInfo.howToStore}</Content>
           <SemiTitle style={styles.semiTitle}>주성분</SemiTitle>
