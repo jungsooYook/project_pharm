@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
-import { useSelector } from "react-redux";
+import { useSelector  } from "react-redux";
 import PharmDataContent from "../components/PharmDataContent";
 import { Alert } from "react-native";
 
@@ -42,14 +42,13 @@ function TakingPharmData({ navigation }) {
     return state.drugInfo;
   });
 
-  const { bigTextMode, darkmode } = useSelector((state) => {
+  const { bigTextMode } = useSelector((state) => {
     return {
       bigTextMode: state.settingInfo.bigTextMode,
       darkmode: state.settingInfo.darkmode,
     };
   });
 
-  console.log(`@@@PharmData : drugInfo[0].name@@@`);
   // remove button press function
 
   return (
@@ -57,8 +56,9 @@ function TakingPharmData({ navigation }) {
       <Title style={{ fontSize: bigTextMode ? 40 : 30 }}>복약 내역</Title>
       <List>
         {drugInfos &&
-          drugInfos.map((drugInfo) => (
+          drugInfos.sort((a,b) => parseFloat(b.id) - parseFloat(a.id)).map((drugInfo) => (
             <PharmDataContent
+              style={{}}
               key={drugInfo.id}
               drugInfo={drugInfo}
               navigation={navigation}

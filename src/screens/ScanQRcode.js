@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, Alert, Vibration, Dimensions } from "react-native";
+import { Text, Alert, Vibration, Dimensions, Pressable } from "react-native";
 import styled from "styled-components/native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import ResetButton from "../components/ResetButton";
@@ -26,21 +26,51 @@ function timestamp() {
 function ScanQRcode({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
-
   const width = Dimensions.get("window").width;
   const dispatch = useDispatch();
 
-  // vibration redux
-  const vibration = useSelector((state) => {
-    return state.settingInfo.vibration;
-  });
+  const {vibration} = useSelector((state) => {
+    return {
+      vibration: state.settingInfo.vibration
+    }
+  })
+
+  // Search StdCode from edited barcode function
+
+  const SearchStdCode = async (data) => {
+    try {
+      await fetch(
+        `https://${secret.firebase_barcode_to_prestdcode_id}/${data.barcode}/PreStdCode/.json`
+      )
+        .then((response) => {
+          return response.json();
+        })
+        .then((PreStdCode) => {
+          console.log(`std of name: ${data.name}`)
+          console.log(`std of barcode: ${data.barcode}`)
+          console.log(`std of id: ${data.id}`)
+
+          data.stdcode = PreStdCode.substring(3,12)
+
+          console.log('std of stdcode: ',data.stdcode)
+
+          dispatch(AddDrugInfo(data))
+          
+        });
+    } 
+    catch (e) {
+      console.log('SearchStdCode function error')
+    }
+  };
+
+
 
   // check drug alert function
-  function CheckDrugAlert(item, drugInfo) {
+  function CheckDrugAlert(data) {
     Alert.alert(
       "복용 약물이 아래 내용이 맞습니까?",
       `복약 시간: ${timestamp()}
-      의약품명: ${item}
+      의약품명: ${data.name}
       `,
       [
         {
@@ -54,7 +84,8 @@ function ScanQRcode({ navigation }) {
           text: "네",
           onPress: () => {
             console.log("OK Pressed");
-            dispatch(AddDrugInfo(drugInfo));
+            console.log(`drug name: ${data.name}\ndrug barcode: ${data.barcode}\ndrug seqcode: ${data.seqcode}`)
+            SearchStdCode(data)
             setScanned(false);
           },
         },
@@ -80,7 +111,6 @@ function ScanQRcode({ navigation }) {
             "]"
           );
           const mainINGR = myJson.body.items[0].MAIN_ITEM_INGR;
-          const id = Date.now().toString();
           const seqcode = myJson.body.items[0].ITEM_SEQ;
           const time = Date().toString();
 
@@ -89,13 +119,14 @@ function ScanQRcode({ navigation }) {
             howToStore: howToStore,
             howMuch: howMuch,
             mainINGR: mainINGR,
-            id: id,
+            id: Date.now().toString(),
             time: time,
             barcode: editedData,
             seqcode: seqcode,
+            stdcode: "initial state"
           };
 
-          return CheckDrugAlert(name, drugInfo);
+          return CheckDrugAlert(drugInfo);
         });
     } catch (e) {
       console.log(e.message);
@@ -124,11 +155,11 @@ function ScanQRcode({ navigation }) {
   ///scan data function
   const handleBarCodeScanned = ({ type, data }) => {
     Vibration.vibrate(vibration ? 200 : 0);
-
     var index = data.indexOf("8806");
     var editedData = data.substring(index, index + 13);
     SearchDrugByBarCode(editedData);
-    console.log(`###\n${type}\n${editedData}\n###`);
+    
+    console.log(`@@@ScanQRcode screen data@@@\nbarcode type: ${type}\nbarcode data:${editedData}\n-----------------------------------`);
     setScanned(true);
   };
 
@@ -160,9 +191,3 @@ function ScanQRcode({ navigation }) {
 }
 
 export default ScanQRcode;
-
-// json url
-// http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService1/getMdcinPrductItem?serviceKey=4ARJOwbLh8jufyYInZFDNEp0phIdsR0d7ZZP0bqJKwTfQ3cL%2BDf7zJWkSnYAk%2B8%2BjCjn%2FV9RLSxZ2vNFQ%2BYHrQ%3D%3D&bar_code=8806469007237&type=json
-
-// xml url
-// http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService1/getMdcinPrductItem?serviceKey=4ARJOwbLh8jufyYInZFDNEp0phIdsR0d7ZZP0bqJKwTfQ3cL%2BDf7zJWkSnYAk%2B8%2BjCjn%2FV9RLSxZ2vNFQ%2BYHrQ%3D%3D&bar_code=8806469007237&type=xml

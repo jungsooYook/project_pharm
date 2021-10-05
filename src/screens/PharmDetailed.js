@@ -65,28 +65,15 @@ function PharmDetailed({ route, navigation }) {
         .then((myJson) => {
           return setUrl(myJson.body.items[0].ITEM_IMAGE);
         });
-    } catch (e) {s
-      console.log(e.message);
-    }
-  };
-
-  const SearchStdCode = async (barcode) => {
-    try {
-      await fetch(
-        `https://${secret.firebase_barcode_to_prestdcode_id}/${barcode}/PreStdCode.json`
-      )
-        .then((response) => {
-          return response.json();
-        })
-        .then((PreStdCode) => {
-          return setStdcode(PreStdCode.substring(3, 12));
-        });
     } catch (e) {
       console.log(e.message);
+      return setUrl("")
     }
   };
 
-  SearchStdCode(drugInfo.barcode);
+
+
+
   SearchDrugImage(seqcode);
 
   const styles = StyleSheet.create({
@@ -118,7 +105,7 @@ function PharmDetailed({ route, navigation }) {
           <SemiTitle style={styles.semiTitle}>바코드</SemiTitle>
           <Content style={styles.text}>{drugInfo.barcode}</Content>
           <Content style={styles.text}>{drugInfo.seqcode}</Content>
-          <Content style={styles.text}>{Stdcode}</Content>
+          <Content style={styles.text}>{drugInfo.stdcode}</Content>
           <SemiTitle style={styles.semiTitle}>저장 방법</SemiTitle>
           <Content style={styles.text}>{drugInfo.howToStore}</Content>
           <SemiTitle style={styles.semiTitle}>주성분</SemiTitle>
@@ -132,18 +119,18 @@ function PharmDetailed({ route, navigation }) {
     return (
       <Container>
         <List>
-          <SemiTitle>약물명</SemiTitle>
-          <Content>{drugInfo.name}</Content>
-          <SemiTitle>바코드</SemiTitle>
-          <Content>{drugInfo.barcode}</Content>
-          <Content>{drugInfo.seqcode}</Content>
-          <SemiTitle>저장 방법</SemiTitle>
-          <Content>{drugInfo.howToStore}</Content>
-          <SemiTitle>주성분</SemiTitle>
-          <Content>{drugInfo.mainINGR}</Content>
-          <SemiTitle>복용방법 및 섭취량</SemiTitle>
-          <Content>{drugInfo.howMuch}</Content>
-          <SemiTitle>복용방법 및 섭취량</SemiTitle>
+        <SemiTitle style={styles.semiTitle}>약물명</SemiTitle>
+          <Content style={styles.text}>{drugInfo.name}</Content>
+          <SemiTitle style={styles.semiTitle}>바코드</SemiTitle>
+          <Content style={styles.text}>{drugInfo.barcode}</Content>
+          <Content style={styles.text}>{drugInfo.seqcode}</Content>
+          <Content style={styles.text}>{drugInfo.stdcode}</Content>
+          <SemiTitle style={styles.semiTitle}>저장 방법</SemiTitle>
+          <Content style={styles.text}>{drugInfo.howToStore}</Content>
+          <SemiTitle style={styles.semiTitle}>주성분</SemiTitle>
+          <Content style={styles.text}>{drugInfo.mainINGR}</Content>
+          <SemiTitle style={styles.semiTitle}>복용방법 및 섭취량</SemiTitle>
+          <Content style={styles.text}>{drugInfo.howMuch}</Content>
         </List>
       </Container>
     );

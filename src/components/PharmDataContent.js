@@ -5,7 +5,6 @@ import styled from "styled-components/native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { DateConvert } from "../util";
-import { NavigationContainer } from "@react-navigation/native";
 
 const width = Dimensions.get("window").width;
 
@@ -66,7 +65,7 @@ const TimeContainer = styled.View`
   justify-content: center;
 `;
 
-const PharmDataContent = ({ drugInfo, namePress }) => {
+const PharmDataContent = ({ drugInfo, namePress, style }) => {
   const dispatch = useDispatch();
   const { id, name } = drugInfo;
   const { year, month, week, date, time } = DateConvert(drugInfo.time);
@@ -127,7 +126,7 @@ const PharmDataContent = ({ drugInfo, namePress }) => {
   }
 
   return (
-    <Container>
+    <Container style={style}>
       <NmaeContainer onPress={namePress}>
         <Content style={{ fontSize: bigTextMode ? 35 : 20 }}>
           {PharmNameset(name)}

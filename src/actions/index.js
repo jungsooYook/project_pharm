@@ -1,4 +1,4 @@
-import { AddDrugInfo, RemoveDrugInfo } from "./DrugInformationAction";
+import { AddDrugInfo, RemoveDrugInfo, UpdateDrugInfo } from "./DrugInformationAction";
 import {
   DarkModeAction,
   ScanVibrationAction,

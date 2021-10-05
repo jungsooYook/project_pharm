@@ -10,6 +10,7 @@ export const AddDrugInfo = (drugInfo) => {
       time: drugInfo.time,
       barcode: drugInfo.barcode,
       seqcode: drugInfo.seqcode,
+      stdcode: drugInfo.stdcode
     },
   };
 };

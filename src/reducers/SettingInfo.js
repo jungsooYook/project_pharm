@@ -24,7 +24,7 @@ function SettingInfo(state = initialState, action) {
 }
 
 const initialState = {
-  darkmode: true,
+  darkmode: false,
   vibration: true,
   bigTextMode: false,
 };
