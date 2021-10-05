@@ -54,7 +54,7 @@ function TakingPharmData({ navigation }) {
 
   return (
     <Container>
-      <Title style={{ fontSize: bigTextMode ? 40 : 30 }}>복용중인 약물</Title>
+      <Title style={{ fontSize: bigTextMode ? 40 : 30 }}>복약 내역</Title>
       <List>
         {drugInfos &&
           drugInfos.map((drugInfo) => (

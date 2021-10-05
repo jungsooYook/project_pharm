@@ -65,7 +65,7 @@ function PharmDetailed({ route, navigation }) {
         .then((myJson) => {
           return setUrl(myJson.body.items[0].ITEM_IMAGE);
         });
-    } catch (e) {
+    } catch (e) {s
       console.log(e.message);
     }
   };
@@ -73,7 +73,7 @@ function PharmDetailed({ route, navigation }) {
   const SearchStdCode = async (barcode) => {
     try {
       await fetch(
-        `https://${secret.firebase_barcode_to_prestdcode_id}/8806985024404/PreStdCode.json`
+        `https://${secret.firebase_barcode_to_prestdcode_id}/${barcode}/PreStdCode.json`
       )
         .then((response) => {
           return response.json();
