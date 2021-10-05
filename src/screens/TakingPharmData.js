@@ -3,6 +3,7 @@ import styled from "styled-components/native";
 import { useSelector  } from "react-redux";
 import PharmDataContent from "../components/PharmDataContent";
 import { Alert } from "react-native";
+import secret from '../data/secret.json'
 
 const Container = styled.SafeAreaView`
   justify-content: flex-start;
@@ -41,6 +42,22 @@ function TakingPharmData({ navigation }) {
   const drugInfos = useSelector((state) => {
     return state.drugInfo;
   });
+
+  //Search forbidden drug function
+  const SearchForbiddenDrug = async (data) => {
+    try {
+      await fetch(
+        `https://${firebase_forbidden_drugg}/${data}/.json`
+      )
+      .then((response) => {
+        return response.json()
+      })
+      .then((json) => {
+        return json.ForbiddenDrug
+      })
+    }
+    catch (e){}
+  }
 
   const { bigTextMode } = useSelector((state) => {
     return {

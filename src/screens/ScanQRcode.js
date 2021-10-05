@@ -40,17 +40,18 @@ function ScanQRcode({ navigation }) {
   const SearchStdCode = async (data) => {
     try {
       await fetch(
-        `https://${secret.firebase_barcode_to_prestdcode_id}/${data.barcode}/PreStdCode/.json`
+        `https://${secret.firebase_barcode_to_prestdcode_id}/${data.barcode}/.json`
       )
         .then((response) => {
           return response.json();
         })
-        .then((PreStdCode) => {
+        .then((json) => {
           console.log(`std of name: ${data.name}`)
           console.log(`std of barcode: ${data.barcode}`)
           console.log(`std of id: ${data.id}`)
 
-          data.stdcode = PreStdCode.substring(3,12)
+          data.stdcode = json.PreStdCode.substring(3,12)
+          data.ATCcode = json.ATCCode
 
           console.log('std of stdcode: ',data.stdcode)
 

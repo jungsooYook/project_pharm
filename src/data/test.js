@@ -1,15 +1,11 @@
 let info = [
-  {id: 'alsure', pw:'1234'},
+  {id: 'alsure', pw:'1234567890'},
   {id: 'alsue2000', pw:'2000'},
   {id: 'choco', pw: 'cho'},
   {id: 'yook', pw:'jungsoo'}
-],
+]
 
-objIndex = info.findIndex((item => item.id == 'alsue2000'))
-
-info[objIndex].pw = '3333'
-
-console.log(info[objIndex].pw)
+console.log(info[0].pw.substring(6,11))
 
 
 // //Log object to Console.

@@ -107,6 +107,7 @@ function PharmDetailed({ route, navigation }) {
           <Content style={styles.text}>{drugInfo.barcode}</Content>
           <Content style={styles.text}>{drugInfo.seqcode}</Content>
           <Content style={styles.text}>{drugInfo.stdcode}</Content>
+          <Content style={styles.text}>{drugInfo.ATCcode}</Content>
           <SemiTitle style={styles.semiTitle}>저장 방법</SemiTitle>
           <Content style={styles.text}>{drugInfo.howToStore}</Content>
           <SemiTitle style={styles.semiTitle}>주성분</SemiTitle>
