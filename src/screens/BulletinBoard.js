@@ -27,19 +27,99 @@ const List = styled.ScrollView`
   margin-bottom: 0;
 `;
 
-const data = `<DOC title=\"효능효과\" type=\"EE\">\r\n  <SECTION title=\"\">\r\n    <ARTICLE title=\"\">\r\n      <PARAGRAPH tagName=\"p\" textIndent=\"\" marginLeft=\"\"><![CDATA[○다음 경우의 비타민 B6의 보급]]></PARAGRAPH>\r\n      <PARAGRAPH tagName=\"p\" textIndent=\"\" marginLeft=\"\"><![CDATA[-임신&#xff65;수유기]]></PARAGRAPH>\r\n      <PARAGRAPH tagName=\"p\" textIndent=\"\" marginLeft=\"\"><![CDATA[-병중&#xff65;병후의 체력저하 시]]></PARAGRAPH>\r\n      <PARAGRAPH tagName=\"p\" textIndent=\"\" marginLeft=\"\"><![CDATA[○마그네슘결핍으로 인한 근육경련]]></PARAGRAPH>\r\n    </ARTICLE>\r\n  </SECTION>\r\n</DOC>`;
-
 const BulletinBoard = () => {
-  const choco = 8 < 20 ? `left` : `right`;
   return (
     <Container>
       <List>
-        <Content>원 투 뜨리</Content>
-        <Content>{EditPharmData(data)}</Content>
-        <Content>{data.indexOf(`title="`, 65)}</Content>
-        <Content>{data.indexOf(`[CDATA[`, 48)}</Content>
-        <Content>{data.indexOf(`"`, 72)}</Content>
-        <Content>{data.indexOf(`title="`, 72)}</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
+        <Content>TEXT MODE</Content>
       </List>
     </Container>
   );
