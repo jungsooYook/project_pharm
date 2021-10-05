@@ -1,17 +1,17 @@
-import React, { useEffect } from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import React, { useEffect } from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
   ScanQRcode,
   TakingPharmData,
   Setting,
   BulletinBoard,
-} from "../screens";
-import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
-import { StatusBar } from "react-native";
+} from '../screens';
+import { MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
+import { StatusBar } from 'react-native';
 
-import { ThemeProvider } from "styled-components/native";
-import { dark, light } from "../theme";
-import { useSelector } from "react-redux";
+import { ThemeProvider } from 'styled-components/native';
+import { dark, light } from '../theme';
+import { useSelector } from 'react-redux';
 
 const Tab = createBottomTabNavigator();
 
@@ -25,7 +25,7 @@ function TabIcon_Awesome5({ name, size, color }) {
 
 function MainTab({ navigation }) {
   // darkmode redux
-  const darkmode = useSelector((state) => {
+  const darkmode = useSelector(state => {
     return state.settingInfo.darkmode;
   });
 
@@ -35,9 +35,9 @@ function MainTab({ navigation }) {
 
   return (
     <Tab.Navigator
-      initialRouteName="Scan"
+      initialRouteName="BulletinBoard"
       screenOptions={{
-        headerTitleAlign: "center",
+        headerTitleAlign: 'center',
         tabBarStyle: {
           backgroundColor: theme.background,
           borderTopColor: theme.background,
@@ -53,10 +53,10 @@ function MainTab({ navigation }) {
         component={BulletinBoard}
         options={{
           headerShown: false,
-          tabBarIcon: (icon) =>
+          tabBarIcon: icon =>
             TabIcon_MaterialCommunityIcons({
               ...icon,
-              name: "clipboard-list-outline",
+              name: 'clipboard-list-outline',
             }),
         }}
       />
@@ -65,8 +65,8 @@ function MainTab({ navigation }) {
         component={TakingPharmData}
         options={{
           headerShown: false,
-          tabBarIcon: (icon) =>
-            TabIcon_MaterialCommunityIcons({ ...icon, name: "pill" }),
+          tabBarIcon: icon =>
+            TabIcon_MaterialCommunityIcons({ ...icon, name: 'pill' }),
         }}
       />
       <Tab.Screen
@@ -74,8 +74,8 @@ function MainTab({ navigation }) {
         component={ScanQRcode}
         options={{
           headerShown: false,
-          tabBarIcon: (icon) =>
-            TabIcon_MaterialCommunityIcons({ ...icon, name: "qrcode-scan" }),
+          tabBarIcon: icon =>
+            TabIcon_MaterialCommunityIcons({ ...icon, name: 'qrcode-scan' }),
         }}
       />
       <Tab.Screen
@@ -83,10 +83,10 @@ function MainTab({ navigation }) {
         component={Setting}
         options={{
           headerShown: false,
-          tabBarIcon: (props) =>
+          tabBarIcon: props =>
             TabIcon_MaterialCommunityIcons({
               ...props,
-              name: "dots-horizontal",
+              name: 'dots-horizontal',
             }),
         }}
       />

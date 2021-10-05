@@ -1,6 +1,6 @@
-export const AddDrugInfo = (drugInfo) => {
+export const AddDrugInfo = drugInfo => {
   return {
-    type: "ADD_DRUGINFO",
+    type: 'ADD_DRUGINFO',
     drugInfo: {
       id: drugInfo.id,
       name: drugInfo.name,
@@ -12,14 +12,15 @@ export const AddDrugInfo = (drugInfo) => {
       barcode: drugInfo.barcode,
       seqcode: drugInfo.seqcode,
       stdcode: drugInfo.stdcode,
-      ATCcode: drugInfo.ATCcode
+      ATCcode: drugInfo.ATCcode,
+      caution: drugInfo.caution,
     },
   };
 };
 
-export const RemoveDrugInfo = (id) => {
+export const RemoveDrugInfo = id => {
   return {
-    type: "REMOVE_DRUGINFO",
+    type: 'REMOVE_DRUGINFO',
     id,
   };
 };
