@@ -155,7 +155,7 @@ function ScanQRcode({ navigation }) {
   ///scan data function
   const handleBarCodeScanned = ({ type, data }) => {
     Vibration.vibrate(vibration ? 200 : 0);
-    var index = data.indexOf("8806");
+    var index = data.indexOf("880");
     var editedData = data.substring(index, index + 13);
     SearchDrugByBarCode(editedData);
     

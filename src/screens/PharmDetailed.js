@@ -40,6 +40,7 @@ const SemiTitle = styled.Text`
   color: ${({ theme }) => theme.semititle};
 `;
 
+
 function PharmDetailed({ route, navigation }) {
   const [url, setUrl] = useState("");
   const [Stdcode, setStdcode] = useState("");
@@ -74,6 +75,7 @@ function PharmDetailed({ route, navigation }) {
 
 
 
+
   SearchDrugImage(seqcode);
 
   const styles = StyleSheet.create({
@@ -84,11 +86,10 @@ function PharmDetailed({ route, navigation }) {
       fontSize: bigTextMode ? 35 : 25,
     },
   });
-
-  if (url !== "") {
     return (
       <Container>
         <List>
+          { (url !== "") ?
           <Image
             style={{
               height: (width * 0.8) / 1.832157,
@@ -99,7 +100,7 @@ function PharmDetailed({ route, navigation }) {
             source={{
               uri: url,
             }}
-          />
+          /> : null}
           <SemiTitle style={styles.semiTitle}>약물명</SemiTitle>
           <Content style={styles.text}>{drugInfo.name}</Content>
           <SemiTitle style={styles.semiTitle}>바코드</SemiTitle>
@@ -115,26 +116,6 @@ function PharmDetailed({ route, navigation }) {
         </List>
       </Container>
     );
-  } else {
-    return (
-      <Container>
-        <List>
-        <SemiTitle style={styles.semiTitle}>약물명</SemiTitle>
-          <Content style={styles.text}>{drugInfo.name}</Content>
-          <SemiTitle style={styles.semiTitle}>바코드</SemiTitle>
-          <Content style={styles.text}>{drugInfo.barcode}</Content>
-          <Content style={styles.text}>{drugInfo.seqcode}</Content>
-          <Content style={styles.text}>{drugInfo.stdcode}</Content>
-          <SemiTitle style={styles.semiTitle}>저장 방법</SemiTitle>
-          <Content style={styles.text}>{drugInfo.howToStore}</Content>
-          <SemiTitle style={styles.semiTitle}>주성분</SemiTitle>
-          <Content style={styles.text}>{drugInfo.mainINGR}</Content>
-          <SemiTitle style={styles.semiTitle}>복용방법 및 섭취량</SemiTitle>
-          <Content style={styles.text}>{drugInfo.howMuch}</Content>
-        </List>
-      </Container>
-    );
-  }
 }
 
 export default PharmDetailed;
