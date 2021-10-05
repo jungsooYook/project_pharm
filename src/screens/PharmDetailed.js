@@ -106,10 +106,12 @@ function PharmDetailed({ route, navigation }) {
           <SemiTitle style={styles.semiTitle}>바코드</SemiTitle>
           <Content style={styles.text}>{drugInfo.barcode}</Content>
           <Content style={styles.text}>{drugInfo.seqcode}</Content>
-          <Content style={styles.text}>{drugInfo.stdcode}</Content>
-          <Content style={styles.text}>{drugInfo.ATCcode}</Content>
+          {(drugInfo.stdcode == "") ? null : <Content style={styles.text}>{drugInfo.stdcode}</Content>}
+          {(drugInfo.ATCcode === "nan") ? null : <Content style={styles.text}>{drugInfo.ATCcode}</Content>}
           <SemiTitle style={styles.semiTitle}>저장 방법</SemiTitle>
           <Content style={styles.text}>{drugInfo.howToStore}</Content>
+          <SemiTitle style={styles.semiTitle}>효능 효과</SemiTitle>
+          <Content style={styles.text}>{drugInfo.effect}</Content>
           <SemiTitle style={styles.semiTitle}>주성분</SemiTitle>
           <Content style={styles.text}>{drugInfo.mainINGR}</Content>
           <SemiTitle style={styles.semiTitle}>복용방법 및 섭취량</SemiTitle>

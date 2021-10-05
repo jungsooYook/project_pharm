@@ -6,6 +6,7 @@ export const AddDrugInfo = (drugInfo) => {
       name: drugInfo.name,
       howToStore: drugInfo.howToStore,
       howMuch: drugInfo.howMuch,
+      effect: drugInfo.effect,
       mainINGR: drugInfo.mainINGR,
       time: drugInfo.time,
       barcode: drugInfo.barcode,

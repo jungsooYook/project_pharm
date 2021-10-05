@@ -111,6 +111,7 @@ function ScanQRcode({ navigation }) {
             "[CDATA[",
             "]"
           );
+          const effect = EditPharmData(myJson.body.items[0].EE_DOC_DATA, '[CDATA[', ']')
           const mainINGR = myJson.body.items[0].MAIN_ITEM_INGR;
           const seqcode = myJson.body.items[0].ITEM_SEQ;
           const time = Date().toString();
@@ -124,7 +125,8 @@ function ScanQRcode({ navigation }) {
             time: time,
             barcode: editedData,
             seqcode: seqcode,
-            stdcode: "initial state"
+            stdcode: "initial state",
+            effect: effect
           };
 
           return CheckDrugAlert(drugInfo);

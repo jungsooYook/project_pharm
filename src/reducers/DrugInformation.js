@@ -12,4 +12,20 @@ function DrugInfomation(state = [], action) {
   }
 }
 
+initialState = {
+  drugInfo: {
+    id: "",
+    name: "",
+    howToStore: "",
+    howMuch: "",
+    effect: "",
+    mainINGR: "",
+    time: "",
+    barcode: "",
+    seqcode: "",
+    stdcode: "",
+    ATCcode: ""
+  }
+}
+
 export { DrugInfomation };
