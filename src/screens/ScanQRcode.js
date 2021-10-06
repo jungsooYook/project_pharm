@@ -39,9 +39,7 @@ function ScanQRcode({ navigation }) {
 
   const SearchStdCode = async data => {
     try {
-      await fetch(
-        `https://${secret.firebase_barcode_to_prestdcode_id}/${data.barcode}/.json`,
-      )
+      await fetch(`${secret.drug_information_key}/${data.barcode}/.json`)
         .then(response => {
           return response.json();
         })
@@ -50,8 +48,19 @@ function ScanQRcode({ navigation }) {
           console.log(`std of barcode: ${data.barcode}`);
           console.log(`std of id: ${data.id}`);
 
-          data.stdcode = json.PreStdCode.substring(3, 12);
+          data.stdcode = json.StdCode;
           data.ATCcode = json.ATCCode;
+          data.PregnantGrade = json.PregnantGrade;
+          data.PregnantNote = json.PregnantNote;
+          data.ElderNote = json.ElderNote;
+          data.ChildAge = json.ChildAge;
+          data.ChildRange = json.ChildRange;
+          data.ChildNote = json.ChildNote;
+          data.MaxInjectDay = json.MaxInjectDay;
+          data.MaxDayCapacity = json.MaxDayCapacity;
+          data.Target = json.Target;
+          data.CombNote = json.CombNote;
+          data.TargetCount = json.TargetCount;
 
           console.log('std of stdcode: ', data.stdcode);
 

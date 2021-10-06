@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Image, Dimensions, Alert, StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
@@ -6,6 +6,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { PharmDataContent } from '../components';
 import { Ionicons } from '@expo/vector-icons';
 import { AddDrugInfo } from '../actions';
+import { dark, light } from '../theme';
 import secret from '../data/secret.json';
 
 const Container = styled.SafeAreaView`
@@ -54,6 +55,7 @@ function PharmDetailed({ route, navigation }) {
     };
   });
 
+  // Search drug image from seq code
   const SearchDrugImage = async seqcode => {
     try {
       await fetch(
@@ -72,6 +74,16 @@ function PharmDetailed({ route, navigation }) {
   };
 
   SearchDrugImage(seqcode);
+
+  // 복용 주의 알림
+  useEffect(() => {
+    drugInfo.PregnantGrade || drugInfo.ElderNote || drugInfo.ChildAge
+      ? Alert.alert(
+          '복용시 주의하세요!',
+          '복용시 주의가 필요한 약물입니다. 반드시 의사와 상의후 복용하세요.',
+        )
+      : null;
+  }, []);
 
   const styles = StyleSheet.create({
     text: {
@@ -97,6 +109,16 @@ function PharmDetailed({ route, navigation }) {
             }}
           />
         ) : null}
+        {drugInfo.PregnantGrade || drugInfo.ElderNote || drugInfo.ChildAge ? (
+          <SemiTitle style={[styles.semiTitle, { color: 'red' }]}>
+            복용 경고!
+          </SemiTitle>
+        ) : null}
+        {
+          <Content style={[styles.text, { color: 'red' }]}>
+            {drugInfo.name}
+          </Content>
+        }
         <SemiTitle style={styles.semiTitle}>약물명</SemiTitle>
         <Content style={styles.text}>{drugInfo.name}</Content>
         <SemiTitle style={styles.semiTitle}>약물 DUR 정보</SemiTitle>
@@ -110,6 +132,9 @@ function PharmDetailed({ route, navigation }) {
         {drugInfo.ATCcode === 'nan' ? null : (
           <Content style={styles.text}>ATC 코드: {drugInfo.ATCcode}</Content>
         )}
+        <Content style={styles.text}>ATC 코드: {drugInfo.ATCcode}</Content>
+        <Content style={styles.text}>ATC 코드: {drugInfo.ATCcode}</Content>
+        <Content style={styles.text}>ATC 코드: {drugInfo.ATCcode}</Content>
         <SemiTitle style={styles.semiTitle}>약물 허가 업데이트 정보</SemiTitle>
         <Content style={styles.text}>{drugInfo.updateInfo}</Content>
         <SemiTitle style={styles.semiTitle}>저장 방법</SemiTitle>

@@ -1,9 +1,10 @@
-import React from "react";
-import styled from "styled-components/native";
-import { useSelector  } from "react-redux";
-import PharmDataContent from "../components/PharmDataContent";
-import { Alert } from "react-native";
-import secret from '../data/secret.json'
+import React from 'react';
+import styled from 'styled-components/native';
+import { useSelector } from 'react-redux';
+import PharmDataContent from '../components/PharmDataContent';
+import { dark, light } from '../theme';
+import { Alert } from 'react-native';
+import secret from '../data/secret.json';
 
 const Container = styled.SafeAreaView`
   justify-content: flex-start;
@@ -39,27 +40,25 @@ const Content = styled.Text`
 
 // function start
 function TakingPharmData({ navigation }) {
-  const drugInfos = useSelector((state) => {
+  const theme = darkmode ? dark : light;
+  const drugInfos = useSelector(state => {
     return state.drugInfo;
   });
 
   //Search forbidden drug function
-  const SearchForbiddenDrug = async (data) => {
+  const SearchForbiddenDrug = async data => {
     try {
-      await fetch(
-        `https://${firebase_forbidden_drugg}/${data}/.json`
-      )
-      .then((response) => {
-        return response.json()
-      })
-      .then((json) => {
-        return json.ForbiddenDrug
-      })
-    }
-    catch (e){}
-  }
+      await fetch(`https://${firebase_forbidden_drugg}/${data}/.json`)
+        .then(response => {
+          return response.json();
+        })
+        .then(json => {
+          return json.ForbiddenDrug;
+        });
+    } catch (e) {}
+  };
 
-  const { bigTextMode } = useSelector((state) => {
+  const { bigTextMode, darkmode } = useSelector(state => {
     return {
       bigTextMode: state.settingInfo.bigTextMode,
       darkmode: state.settingInfo.darkmode,
@@ -73,17 +72,28 @@ function TakingPharmData({ navigation }) {
       <Title style={{ fontSize: bigTextMode ? 40 : 30 }}>복약 내역</Title>
       <List>
         {drugInfos &&
-          drugInfos.sort((a,b) => parseFloat(b.id) - parseFloat(a.id)).map((drugInfo) => (
-            <PharmDataContent
-              style={{}}
-              key={drugInfo.id}
-              drugInfo={drugInfo}
-              navigation={navigation}
-              namePress={() =>
-                navigation.navigate("PharmDetailed", { drugInfo })
-              }
-            />
-          ))}
+          drugInfos
+            .sort((a, b) => parseFloat(b.id) - parseFloat(a.id))
+            .map(drugInfo => (
+              <PharmDataContent
+                style={{
+                  backgroundColor:
+                    drugInfo.PregnantGrade ||
+                    drugInfo.ElderNote ||
+                    drugInfo.ChildAge
+                      ? 'red'
+                      : darkmode
+                      ? 'gray'
+                      : 'lightgray',
+                }}
+                key={drugInfo.id}
+                drugInfo={drugInfo}
+                navigation={navigation}
+                namePress={() =>
+                  navigation.navigate('PharmDetailed', { drugInfo })
+                }
+              />
+            ))}
       </List>
     </Container>
   );

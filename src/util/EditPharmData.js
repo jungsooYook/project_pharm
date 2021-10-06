@@ -37,7 +37,6 @@ const EditPharmData = data => {
     selectNextIndex(nextTitleIndex, nextContentIndex);
 
     EditedData += data.substring(startIndex + 7, endIndex) + `\n`;
-    console.log(index);
   }
   return EditedData;
 };

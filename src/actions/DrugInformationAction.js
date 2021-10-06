@@ -16,6 +16,17 @@ export const AddDrugInfo = drugInfo => {
       caution: drugInfo.caution,
       brandName: drugInfo.brandName,
       updateInfo: drugInfo.updateInfo,
+      PregnantGrade: drugInfo.PregnantGrade,
+      PregnantNote: drugInfo.PregnantNote,
+      ElderNote: drugInfo.ElderNote,
+      ChildAge: drugInfo.ChildAge,
+      ChildRange: drugInfo.ChildRange,
+      ChildNote: drugInfo.ChildNote,
+      MaxInjectDay: drugInfo.MaxInjectDay,
+      MaxDayCapacity: drugInfo.MaxDayCapacity,
+      Target: drugInfo.Target,
+      CombNote: drugInfo.CombNote,
+      TargetCount: drugInfo.TargetCount,
     },
   };
 };
@@ -26,3 +37,5 @@ export const RemoveDrugInfo = id => {
     id,
   };
 };
+
+// 8806456009336
