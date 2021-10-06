@@ -114,6 +114,8 @@ function ScanQRcode({ navigation }) {
             stdcode: 'initial state',
             effect: EditPharmData(myJson.body.items[0].EE_DOC_DATA),
             caution: EditPharmData(myJson.body.items[0].NB_DOC_DATA),
+            brandName: myJson.body.items[0].ENTP_NAME,
+            updateInfo: myJson.body.items[0].GBN_NAME,
           };
 
           return CheckDrugAlert(drugInfo);

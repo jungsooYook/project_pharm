@@ -99,15 +99,19 @@ function PharmDetailed({ route, navigation }) {
         ) : null}
         <SemiTitle style={styles.semiTitle}>약물명</SemiTitle>
         <Content style={styles.text}>{drugInfo.name}</Content>
-        <SemiTitle style={styles.semiTitle}>바코드</SemiTitle>
-        <Content style={styles.text}>{drugInfo.barcode}</Content>
-        <Content style={styles.text}>{drugInfo.seqcode}</Content>
+        <SemiTitle style={styles.semiTitle}>약물 DUR 정보</SemiTitle>
+
+        <Content style={styles.text}>제조사: {drugInfo.brandName}</Content>
+        <Content style={styles.text}>바코드: {drugInfo.barcode}</Content>
+        <Content style={styles.text}>품목 기준코드: {drugInfo.seqcode}</Content>
         {drugInfo.stdcode == '' ? null : (
-          <Content style={styles.text}>{drugInfo.stdcode}</Content>
+          <Content style={styles.text}>의약품 코드: {drugInfo.stdcode}</Content>
         )}
         {drugInfo.ATCcode === 'nan' ? null : (
-          <Content style={styles.text}>{drugInfo.ATCcode}</Content>
+          <Content style={styles.text}>ATC 코드: {drugInfo.ATCcode}</Content>
         )}
+        <SemiTitle style={styles.semiTitle}>약물 허가 업데이트 정보</SemiTitle>
+        <Content style={styles.text}>{drugInfo.updateInfo}</Content>
         <SemiTitle style={styles.semiTitle}>저장 방법</SemiTitle>
         <Content style={styles.text}>{drugInfo.howToStore}</Content>
         <SemiTitle style={styles.semiTitle}>사용시 주의사항</SemiTitle>

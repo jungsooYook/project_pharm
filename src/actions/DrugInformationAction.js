@@ -14,6 +14,8 @@ export const AddDrugInfo = drugInfo => {
       stdcode: drugInfo.stdcode,
       ATCcode: drugInfo.ATCcode,
       caution: drugInfo.caution,
+      brandName: drugInfo.brandName,
+      updateInfo: drugInfo.updateInfo,
     },
   };
 };
