@@ -141,7 +141,7 @@ function PharmDetailed({ route, navigation }) {
         <Content style={styles.text}>바코드: {drugInfo.barcode}</Content>
         <Content style={styles.text}>품목 기준코드: {drugInfo.seqcode}</Content>
         {drugInfo.stdcode == '' ? null : (
-          <Content style={styles.text}>의약품 코드: {drugInfo.stdcode}</Content>
+          <Content style={styles.text}>의약품 코드: {drugInfo.StdCode}</Content>
         )}
         {drugInfo.ATCcode === 'nan' ? null : (
           <Content style={styles.text}>ATC 코드: {drugInfo.ATCcode}</Content>

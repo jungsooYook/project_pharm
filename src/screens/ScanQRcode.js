@@ -37,18 +37,39 @@ function ScanQRcode({ navigation }) {
 
   // Search StdCode from edited barcode function
 
+  const SearchMoreData = async data => {
+    try {
+      await fetch(`${secret.drug_information_key2}/${data.StdCode}/.json`)
+        .then(response => {
+          return response.json();
+        })
+        .then(json => {
+          data.CombTarget = json.CombTarget;
+          data.CombNote = json.CombNote;
+          data.CombCount = json.CombCount;
+          data.EffectGroup = json.EffectGroup;
+          data.EffectTarget = json.EffectTarget;
+          data.DuplicationCount = json.DuplicationCount;
+
+          dispatch(AddDrugInfo(data));
+        });
+    } catch (e) {
+      console.log(e.message);
+      console.log('SearchMoreData function error');
+    }
+  };
+
   const SearchStdCode = async data => {
     try {
-      await fetch(`${secret.drug_information_key}/${data.barcode}/.json`)
+      await fetch(`${secret.drug_information_key1}/${data.barcode}/.json`)
         .then(response => {
           return response.json();
         })
         .then(json => {
           console.log(`std of name: ${data.name}`);
           console.log(`std of barcode: ${data.barcode}`);
-          console.log(`std of id: ${data.id}`);
 
-          data.stdcode = json.StdCode;
+          data.StdCode = json.StdCode;
           data.ATCcode = json.ATCCode;
           data.PregnantGrade = json.PregnantGrade;
           data.PregnantNote = json.PregnantNote;
@@ -58,13 +79,10 @@ function ScanQRcode({ navigation }) {
           data.ChildNote = json.ChildNote;
           data.MaxInjectDay = json.MaxInjectDay;
           data.MaxDayCapacity = json.MaxDayCapacity;
-          data.Target = json.Target;
-          data.CombNote = json.CombNote;
-          data.TargetCount = json.TargetCount;
 
-          console.log('std of stdcode: ', data.stdcode);
+          console.log('std of stdcode: ', data.StdCode);
 
-          dispatch(AddDrugInfo(data));
+          SearchMoreData(data);
         });
     } catch (e) {
       console.log('SearchStdCode function error');
@@ -120,11 +138,26 @@ function ScanQRcode({ navigation }) {
             time: Date().toString(),
             barcode: editedData,
             seqcode: myJson.body.items[0].ITEM_SEQ,
-            stdcode: 'initial state',
             effect: EditPharmData(myJson.body.items[0].EE_DOC_DATA),
             caution: EditPharmData(myJson.body.items[0].NB_DOC_DATA),
             brandName: myJson.body.items[0].ENTP_NAME,
             updateInfo: myJson.body.items[0].GBN_NAME,
+            dataStdCode: '',
+            ATCcode: '',
+            PregnantGrade: '',
+            PregnantNote: '',
+            ElderNote: '',
+            ChildAge: '',
+            ChildRange: '',
+            ChildNote: '',
+            MaxInjectDay: '',
+            MaxDayCapacity: '',
+            CombTarget: '',
+            CombNote: '',
+            CombCount: '',
+            EffectGroup: '',
+            EffectTarget: '',
+            DuplicationCount: '',
           };
 
           return CheckDrugAlert(drugInfo);

@@ -11,7 +11,7 @@ export const AddDrugInfo = drugInfo => {
       time: drugInfo.time,
       barcode: drugInfo.barcode,
       seqcode: drugInfo.seqcode,
-      stdcode: drugInfo.stdcode,
+      StdCode: drugInfo.StdCode,
       ATCcode: drugInfo.ATCcode,
       caution: drugInfo.caution,
       brandName: drugInfo.brandName,
@@ -24,9 +24,12 @@ export const AddDrugInfo = drugInfo => {
       ChildNote: drugInfo.ChildNote,
       MaxInjectDay: drugInfo.MaxInjectDay,
       MaxDayCapacity: drugInfo.MaxDayCapacity,
-      Target: drugInfo.Target,
+      CombTarget: drugInfo.CombTarget,
       CombNote: drugInfo.CombNote,
-      TargetCount: drugInfo.TargetCount,
+      CombCount: drugInfo.CombCount,
+      EffectGroup: drugInfo.EffectGroup,
+      EffectTarget: drugInfo.EffectTarget,
+      DuplicationCount: drugInfo.DuplicationCount,
     },
   };
 };
