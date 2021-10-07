@@ -122,12 +122,7 @@ function PharmDetailed({ route, navigation }) {
           </Content>
         ) : null}
         {drugInfo.ElderNote ? (
-          <Content style={[styles.text, { color: 'red' }]}>
-            고령자분들은 복용시 위험 할 수 있으니 의사와 상담 후 복용하세요.
-          </Content>
-          {drugInfo.ElderNote == 'nan' ? null : <Content style={[styles.text, { color: 'red' }]}>
-          고령자분들은 복용시 위험 할 수 있으니 의사와 상담 후 복용하세요.
-        </Content>}
+          <Content style={([styles.text], { color: 'red' })}>123</Content>
         ) : null}
         {drugInfo.ChildAge ? (
           <Content style={[styles.text, { color: 'red' }]}>
