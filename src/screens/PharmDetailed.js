@@ -122,7 +122,9 @@ function PharmDetailed({ route, navigation }) {
           </Content>
         ) : null}
         {drugInfo.ElderNote ? (
-          <Content style={([styles.text], { color: 'red' })}>123</Content>
+          drugInfo.ElderNote == 'nan' ? null : (
+            <Content style={styles.text}>{drugInfo.ElderNote}</Content>
+          )
         ) : null}
         {drugInfo.ChildAge ? (
           <Content style={[styles.text, { color: 'red' }]}>
@@ -131,10 +133,8 @@ function PharmDetailed({ route, navigation }) {
             }`}
           </Content>
         ) : null}
-        <SemiTitle style={styles.semiTitle}>
-          {drugInfo.ElderNote ? 'true' : 'false'}
-        </SemiTitle>
-        <Content style={styles.text}>{drugInfo.name}</Content>
+        <SemiTitle style={styles.semiTitle}>약물명</SemiTitle>
+        <Content style={styles.text}>{drugInfo.EffectGroup}</Content>
         <SemiTitle style={styles.semiTitle}>약물 DUR 정보</SemiTitle>
 
         <Content style={styles.text}>제조사: {drugInfo.brandName}</Content>
