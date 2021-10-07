@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "test1996022196054766",
-    "slug": "test1996022196054766",
+    "name": "테스트어플입니다",
+    "slug": "testapp39489385",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,11 +18,11 @@
     ],
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.dhskjfhajks.dsaokfpoia",
+      "bundleIdentifier": "com.fajioej.fajcieunfie",
       "buildNumber": "1.0.0"
     },
     "android": {
-      "package": "com.dhskjfhajks.dsaokfpoia",
+      "package": "com.fajioej.fajcieunfie",
       "versionCode": 1,
       "permissions": ["CAMERA", "VIBRATE"],
       "adaptiveIcon": {

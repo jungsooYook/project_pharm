@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import styled from "styled-components/native";
-import { Switch } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
-import { dark, light } from "../theme";
-import { ScanVibrationAction } from "../actions";
+import React, { useState } from 'react';
+import styled from 'styled-components/native';
+import { Switch } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { dark, light } from '../theme';
+import { ScanVibrationAction } from '../actions';
 
 const Container = styled.View`
   flex-direction: row;
@@ -25,7 +25,7 @@ const Content = styled.Text`
 `;
 
 /// function start
-function ScanVibrationButton({ content }) {
+function ScanVibrationButton({ content, style }) {
   const dispatch = useDispatch();
 
   function toggleSwitch() {
@@ -34,7 +34,7 @@ function ScanVibrationButton({ content }) {
   }
 
   // darkmode redux
-  const { vibration, darkmode, bigTextMode } = useSelector((state) => {
+  const { vibration, darkmode, bigTextMode } = useSelector(state => {
     return {
       vibration: state.settingInfo.vibration,
       darkmode: state.settingInfo.darkmode,
@@ -46,7 +46,7 @@ function ScanVibrationButton({ content }) {
 
   ///rendering start
   return (
-    <Container>
+    <Container style={style}>
       <Content style={{ fontSize: bigTextMode ? 40 : 20 }}>{content}</Content>
       <SwitchContainer>
         <Switch
@@ -60,7 +60,7 @@ function ScanVibrationButton({ content }) {
           value={vibration}
           style={{
             marginLeft: 4,
-            alignItems: "center",
+            alignItems: 'center',
           }}
         />
       </SwitchContainer>

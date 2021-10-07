@@ -1,15 +1,8 @@
 import React, { useEffect } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import {
-  ScanQRcode,
-  TakingPharmData,
-  Setting,
-  BulletinBoard,
-} from '../screens';
+import { ScanQRcode, TakingPharmData, Setting, DrugNow } from '../screens';
 import { MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
-import { StatusBar } from 'react-native';
 
-import { ThemeProvider } from 'styled-components/native';
 import { dark, light } from '../theme';
 import { useSelector } from 'react-redux';
 
@@ -49,8 +42,8 @@ function MainTab({ navigation }) {
       }}
     >
       <Tab.Screen
-        name="BulletinBoard"
-        component={BulletinBoard}
+        name="DrugNow"
+        component={DrugNow}
         options={{
           headerShown: false,
           tabBarIcon: icon =>

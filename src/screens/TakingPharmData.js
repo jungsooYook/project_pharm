@@ -8,7 +8,7 @@ import secret from '../data/secret.json';
 
 const Container = styled.SafeAreaView`
   justify-content: flex-start;
-  padding-top: 10px
+  padding-top: 7px
   flex: 1;
   align-items: center;
   background-color: ${({ theme }) => theme.background};
@@ -20,7 +20,8 @@ const Title = styled.Text`
   font-size: 30px;
   font-weight: bold;
   color: ${({ theme }) => theme.title};
-  padding-top: 9px;
+  padding-top: 0;
+  margin-top: 0;
 `;
 
 const List = styled.ScrollView`
@@ -70,6 +71,11 @@ function TakingPharmData({ navigation }) {
   return (
     <Container>
       <Title style={{ fontSize: bigTextMode ? 40 : 30 }}>복약 내역</Title>
+      <Content
+        style={{ color: theme.caution, paddingTop: 20, paddingBottom: 0 }}
+      >
+        빨간색으로 뜨는 약물은 복용시 주의가 필요한 약물입니다.
+      </Content>
       <List>
         {drugInfos &&
           drugInfos
@@ -81,7 +87,7 @@ function TakingPharmData({ navigation }) {
                     drugInfo.PregnantGrade ||
                     drugInfo.ElderNote ||
                     drugInfo.ChildAge
-                      ? 'red'
+                      ? theme.caution
                       : darkmode
                       ? 'gray'
                       : 'lightgray',

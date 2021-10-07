@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import styled from "styled-components/native";
-import { Switch } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
-import { DarkModeAction } from "../actions";
-import { dark, light } from "../theme";
+import React, { useState } from 'react';
+import styled from 'styled-components/native';
+import { Switch } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { DarkModeAction } from '../actions';
+import { dark, light } from '../theme';
 
 const Container = styled.View`
   flex-direction: row;
@@ -25,7 +25,7 @@ const Content = styled.Text`
 `;
 
 /// function start
-function DarkModeButton({ content }) {
+function DarkModeButton({ content, style }) {
   const dispatch = useDispatch();
 
   const theme = darkmode ? dark : light;
@@ -34,7 +34,7 @@ function DarkModeButton({ content }) {
     dispatch(DarkModeAction());
   }
 
-  const { bigTextMode, darkmode } = useSelector((state) => {
+  const { bigTextMode, darkmode } = useSelector(state => {
     return {
       bigTextMode: state.settingInfo.bigTextMode,
       darkmode: state.settingInfo.darkmode,
@@ -42,7 +42,7 @@ function DarkModeButton({ content }) {
   });
   ///rendering start
   return (
-    <Container>
+    <Container style={style}>
       <Content style={{ fontSize: bigTextMode ? 40 : 20 }}>{content}</Content>
       <SwitchContainer>
         <Switch
@@ -56,7 +56,7 @@ function DarkModeButton({ content }) {
           value={darkmode}
           style={{
             marginLeft: 4,
-            alignItems: "center",
+            alignItems: 'center',
           }}
         />
       </SwitchContainer>

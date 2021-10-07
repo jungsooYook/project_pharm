@@ -1,20 +1,21 @@
-import React from "react";
-import styled from "styled-components/native";
-import { Dimensions } from "react-native";
+import React from 'react';
+import styled from 'styled-components/native';
+import { Dimensions } from 'react-native';
 import {
   DarkModeButton,
   ScanVibrationButton,
   BigTextMode,
-} from "../components";
-import { useSelector } from "react-redux";
+} from '../components';
+import { useSelector } from 'react-redux';
 
 const Container = styled.SafeAreaView`
   justify-content: flex-start;
-  padding-top: 10px;
-  padding-right: 10px
+  padding-top: 7px
   flex: 1;
   align-items: center;
   background-color: ${({ theme }) => theme.background};
+  padding-left: 15px;
+  padding-right: 15px
 `;
 
 const List = styled.ScrollView`
@@ -26,16 +27,15 @@ const List = styled.ScrollView`
 const Title = styled.Text`
   font-size: 30px;
   font-weight: bold
-  padding-top:11px
-  padding-bottom: 30px
+  padding-bottom: 15px
   color: ${({ theme }) => theme.title};
 `;
 
 /// function start
 function Setting() {
-  const width = Dimensions.get("window").width;
+  const width = Dimensions.get('window').width;
 
-  const { bigTextMode, darkmode } = useSelector((state) => {
+  const { bigTextMode, darkmode } = useSelector(state => {
     return {
       bigTextMode: state.settingInfo.bigTextMode,
       darkmode: state.settingInfo.darkmode,
