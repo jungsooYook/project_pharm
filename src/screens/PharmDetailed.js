@@ -114,12 +114,31 @@ function PharmDetailed({ route, navigation }) {
             복용 경고!
           </SemiTitle>
         ) : null}
-        {
+        {drugInfo.PregnantGrade ? (
           <Content style={[styles.text, { color: 'red' }]}>
-            {drugInfo.name}
+            {`임부 금기 등급: ${drugInfo.PregnantGrade}\n비고: ${
+              drugInfo.PregnantNote == 'nan' ? null : drugInfo.PregnantNote
+            }`}
           </Content>
-        }
-        <SemiTitle style={styles.semiTitle}>약물명</SemiTitle>
+        ) : null}
+        {drugInfo.ElderNote ? (
+          <Content style={[styles.text, { color: 'red' }]}>
+            고령자분들은 복용시 위험 할 수 있으니 의사와 상담 후 복용하세요.
+          </Content>
+          {drugInfo.ElderNote == 'nan' ? null : <Content style={[styles.text, { color: 'red' }]}>
+          고령자분들은 복용시 위험 할 수 있으니 의사와 상담 후 복용하세요.
+        </Content>}
+        ) : null}
+        {drugInfo.ChildAge ? (
+          <Content style={[styles.text, { color: 'red' }]}>
+            {`${drugInfo.ChildAge}${drugInfo.ChildRange}\n비고: ${
+              drugInfo.ChildNote == 'nan' ? Boolean(false) : drugInfo.ChildNote
+            }`}
+          </Content>
+        ) : null}
+        <SemiTitle style={styles.semiTitle}>
+          {drugInfo.ElderNote ? 'true' : 'false'}
+        </SemiTitle>
         <Content style={styles.text}>{drugInfo.name}</Content>
         <SemiTitle style={styles.semiTitle}>약물 DUR 정보</SemiTitle>
 
