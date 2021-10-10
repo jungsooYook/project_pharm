@@ -57,6 +57,8 @@ function PharmDetailed({ route, navigation }) {
   const [showDUR, setShowDUR] = useState(false);
   const [showCaution, setShowCaution] = useState(false);
   const [showUpdate, setShowUpdate] = useState(false);
+  const [showHowToStore, setShowHowToStore] = useState(false);
+  const [showEffect, setShowEffect] = useState(false);
   var { drugInfo } = route.params;
   const seqcode = drugInfo.seqcode;
 
@@ -124,22 +126,22 @@ function PharmDetailed({ route, navigation }) {
             }}
           />
         ) : null}
-        {drugInfo.PregnantGrade || drugInfo.ElderNote || drugInfo.ChildAge ? (
+        {drugInfo.PregnantGrade || drugInfo.ElderNote || drugInfo.ChildAge ? ( // 복용 경고 표시 여부
           <SemiTitle style={[styles.semiTitle, { color: theme.caution }]}>
             복용 경고!
           </SemiTitle>
         ) : null}
-        {drugInfo.PregnantGrade ? (
+        {drugInfo.PregnantGrade ? ( // 임부경고 표시 여부
           <Content style={[styles.text, { color: theme.caution }]}>
             {`임부 복용 경고!\n\n임부 금기 등급: ${drugInfo.PregnantGrade}\n${
               drugInfo.PregnantNote == 'nan' ? null : drugInfo.PregnantNote
             }`}
           </Content>
         ) : null}
-        {drugInfo.ElderNote ? (
+        {drugInfo.ElderNote ? ( // 고령자 경고 표시 여부
           drugInfo.ElderNote == 'nan' ? (
             <Content style={[styles.text, { color: theme.caution }]}>
-              고령자 복용 경고
+              고령자 복용 경고!
             </Content>
           ) : (
             <Content style={[styles.text, { color: theme.caution }]}>
@@ -149,17 +151,21 @@ function PharmDetailed({ route, navigation }) {
         ) : null}
         {drugInfo.ChildAge ? (
           <Content style={[styles.text, { color: theme.caution }]}>
-            {`${drugInfo.ChildAge}${drugInfo.ChildRange}\n${
-              drugInfo.ChildNote == 'nan' ? Boolean(false) : drugInfo.ChildNote
+            {`소아 청소년 복용 경고!\n${drugInfo.ChildAge} ${
+              drugInfo.ChildRange
+            } 복용시 주의하세요\n${
+              drugInfo.ChildNote == 'nan' ? '' : drugInfo.ChildNote
             }`}
           </Content>
         ) : null}
         <SemiTitle style={styles.semiTitle}>약물명</SemiTitle>
         <Content style={styles.text}>{drugInfo.name}</Content>
+
         <SemiContainer>
           <SemiTitle style={styles.semiTitle}>약물 DUR 정보</SemiTitle>
           <TouchableOpacity
             style={{
+              // 약물 DUR정보
               paddingRight: 4,
               paddingLeft: 5,
               justifyContent: 'center',
@@ -237,8 +243,39 @@ function PharmDetailed({ route, navigation }) {
             <Content style={styles.text}>{drugInfo.updateInfo}</Content>
           </SemiContainer>
         ) : null}
-        <SemiTitle style={styles.semiTitle}>저장 방법</SemiTitle>
-        <Content style={styles.text}>{drugInfo.howToStore}</Content>
+
+        <SemiContainer>
+          <SemiTitle style={styles.semiTitle}>약물 저장 방법</SemiTitle>
+          <TouchableOpacity
+            style={{
+              paddingRight: 4,
+              paddingLeft: 5,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            onPress={() => {
+              setShowHowToStore(prev => !prev);
+            }}
+          >
+            <FontAwesome5
+              name={showHowToStore ? 'chevron-up' : 'chevron-down'}
+              size={25}
+              color={theme.text}
+            />
+          </TouchableOpacity>
+        </SemiContainer>
+        {showHowToStore ? (
+          <SemiContainer
+            style={{
+              flexDirection: 'column',
+              flex: 1,
+              justifyContent: 'flex-start',
+              alignItems: 'flex-start',
+            }}
+          >
+            <Content style={styles.text}>{drugInfo.howToStore}</Content>
+          </SemiContainer>
+        ) : null}
 
         <SemiContainer>
           <SemiTitle style={styles.semiTitle}>복용시 주의사항</SemiTitle>
@@ -273,8 +310,41 @@ function PharmDetailed({ route, navigation }) {
           </SemiContainer>
         ) : null}
 
-        <SemiTitle style={styles.semiTitle}>효능 효과</SemiTitle>
-        <Content style={styles.text}>{drugInfo.effect.substring(6)}</Content>
+        <SemiContainer>
+          <SemiTitle style={styles.semiTitle}>효능 및 효과</SemiTitle>
+          <TouchableOpacity
+            style={{
+              paddingRight: 4,
+              paddingLeft: 5,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            onPress={() => {
+              setShowEffect(prev => !prev);
+            }}
+          >
+            <FontAwesome5
+              name={showEffect ? 'chevron-up' : 'chevron-down'}
+              size={25}
+              color={theme.text}
+            />
+          </TouchableOpacity>
+        </SemiContainer>
+        {showEffect ? (
+          <SemiContainer
+            style={{
+              flexDirection: 'column',
+              flex: 1,
+              justifyContent: 'flex-start',
+              alignItems: 'flex-start',
+            }}
+          >
+            <Content style={styles.text}>
+              {drugInfo.effect.substring(6)}
+            </Content>
+          </SemiContainer>
+        ) : null}
+
         <SemiTitle style={styles.semiTitle}>주성분</SemiTitle>
         <Content style={styles.text}>{drugInfo.mainINGR}</Content>
         <SemiTitle style={styles.semiTitle}>복용방법 및 섭취량</SemiTitle>

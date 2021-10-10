@@ -1,12 +1,13 @@
-import React from "react";
-import { Dimensions, Alert } from "react-native";
-import { RemoveDrugInfo } from "../actions";
-import styled from "styled-components/native";
-import { FontAwesome5 } from "@expo/vector-icons";
-import { useDispatch, useSelector } from "react-redux";
-import { DateConvert } from "../util";
+import React from 'react';
+import { Dimensions, Alert, Vibration } from 'react-native';
+import { RemoveDrugInfo } from '../actions';
+import styled from 'styled-components/native';
+import { FontAwesome5 } from '@expo/vector-icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { DateConvert } from '../util';
+import * as Speech from 'expo-speech';
 
-const width = Dimensions.get("window").width;
+const width = Dimensions.get('window').width;
 
 const Container = styled.View`
   flex:1;
@@ -69,7 +70,7 @@ const PharmDataContent = ({ drugInfo, namePress, style }) => {
   const dispatch = useDispatch();
   const { id, name } = drugInfo;
   const { year, month, week, date, time } = DateConvert(drugInfo.time);
-  const { bigTextMode, darkmode } = useSelector((state) => {
+  const { bigTextMode, darkmode } = useSelector(state => {
     return {
       bigTextMode: state.settingInfo.bigTextMode,
       darkmode: state.settingInfo.darkmode,
@@ -106,28 +107,38 @@ const PharmDataContent = ({ drugInfo, namePress, style }) => {
 
   // remove press function
   function removePress() {
-    console.log("Press remove button");
+    console.log('Press remove button');
     Alert.alert(
-      "정말 삭제하시겠습니까?",
-      "삭제시 복구 불가능하니 신중히 선택바랍니다.",
+      '정말 삭제하시겠습니까?',
+      '삭제시 복구 불가능하니 신중히 선택바랍니다.',
       [
         {
-          text: "아니요",
+          text: '아니요',
           onPress: () => {},
         },
         {
-          text: "네",
+          text: '네',
           onPress: () => {
             dispatch(RemoveDrugInfo(id));
           },
         },
-      ]
+      ],
     );
+  }
+
+  // long press function
+  function longPress() {
+    Vibration.vibrate(50);
+    Speech.speak(name);
   }
 
   return (
     <Container style={style}>
-      <NmaeContainer onPress={namePress}>
+      <NmaeContainer
+        onPress={namePress}
+        onLongPress={longPress}
+        delayLongPress={300}
+      >
         <Content style={{ fontSize: bigTextMode ? 35 : 20 }}>
           {PharmNameset(name)}
         </Content>
