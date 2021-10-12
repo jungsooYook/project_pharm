@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Alert, Vibration, Dimensions, Text } from 'react-native';
 import styled from 'styled-components/native';
-import { EditPharmData } from '../util';
 
 const width = Dimensions.get('window').width;
 

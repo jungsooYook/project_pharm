@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Text, Alert, Vibration, Dimensions, Pressable } from 'react-native';
+import { Text, Alert, Vibration, Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import ResetButton from '../components/ResetButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { AddDrugInfo } from '../actions';
 import OverlayView from '../components/OverlayView';
-import { EditPharmData, EditPharmName } from '../util';
+import { EditPharmData, EditPharmName } from '../utils';
 import secret from '../data/secret.json';
+import DrugSearchButton from '../components/DrugSearchButton';
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -188,7 +189,7 @@ function ScanQRcode({ navigation }) {
 
   ///scan data function
   const handleBarCodeScanned = ({ type, data }) => {
-    Vibration.vibrate(vibration ? 200 : 0);
+    Vibration.vibrate(vibration ? 80 : 0);
     var index = data.indexOf('880');
     var editedData = data.substring(index, index + 13);
     SearchDrugByBarCode(editedData);
@@ -222,6 +223,7 @@ function ScanQRcode({ navigation }) {
       {scanned && (
         <ResetButton onPress={() => setScanned(false)} title="다시스캔" />
       )}
+      <DrugSearchButton />
     </Container>
   );
 }

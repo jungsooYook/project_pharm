@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Image, Dimensions, Alert, StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
+import * as Speech from 'expo-speech';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { PharmDataContent } from '../components';
 import { FontAwesome5 } from '@expo/vector-icons';
-import { AddDrugInfo } from '../actions';
 import { dark, light } from '../theme';
 import secret from '../data/secret.json';
 
@@ -25,6 +24,7 @@ const SemiContainer = styled.View`
   align-items: center;
   justify-content: center;
   flex-direction: row;
+  padding-bottom: 10px;
 `;
 
 const List = styled.ScrollView`
@@ -53,12 +53,13 @@ flex:1
 
 function PharmDetailed({ route, navigation }) {
   const [url, setUrl] = useState('');
-  const [Stdcode, setStdcode] = useState('');
   const [showDUR, setShowDUR] = useState(false);
   const [showCaution, setShowCaution] = useState(false);
   const [showUpdate, setShowUpdate] = useState(false);
   const [showHowToStore, setShowHowToStore] = useState(false);
   const [showEffect, setShowEffect] = useState(false);
+  const [showINGR, setShowINGR] = useState(false);
+  const [showMethod, setShowMethod] = useState(false);
   var { drugInfo } = route.params;
   const seqcode = drugInfo.seqcode;
 
@@ -107,6 +108,10 @@ function PharmDetailed({ route, navigation }) {
     },
     semiTitle: {
       fontSize: bigTextMode ? 35 : 25,
+    },
+    icon: {
+      color: theme.text,
+      fontSize: 22,
     },
   });
 
@@ -162,11 +167,45 @@ function PharmDetailed({ route, navigation }) {
         <Content style={styles.text}>{drugInfo.name}</Content>
 
         <SemiContainer>
+          <SemiTitle style={styles.semiTitle}>복용방법 및 섭취량</SemiTitle>
+          <TouchableOpacity
+            style={{
+              paddingRight: 4,
+              paddingLeft: 5,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            onPress={() => {
+              setShowMethod(prev => !prev);
+            }}
+          >
+            <FontAwesome5
+              name={showMethod ? 'chevron-up' : 'chevron-down'}
+              style={styles.icon}
+            />
+          </TouchableOpacity>
+        </SemiContainer>
+        {showMethod ? (
+          <SemiContainer
+            style={{
+              flexDirection: 'column',
+              flex: 1,
+              justifyContent: 'flex-start',
+              alignItems: 'flex-start',
+            }}
+          >
+            <Content style={styles.text}>
+              {drugInfo.howMuch.substring(6)}
+            </Content>
+          </SemiContainer>
+        ) : null}
+
+        <SemiContainer>
           <SemiTitle style={styles.semiTitle}>약물 DUR 정보</SemiTitle>
           <TouchableOpacity
             style={{
               // 약물 DUR정보
-              paddingRight: 4,
+              paddingRight: 5,
               paddingLeft: 5,
               justifyContent: 'center',
               alignItems: 'center',
@@ -177,8 +216,7 @@ function PharmDetailed({ route, navigation }) {
           >
             <FontAwesome5
               name={showDUR ? 'chevron-up' : 'chevron-down'}
-              size={25}
-              color={theme.text}
+              style={styles.icon}
             />
           </TouchableOpacity>
         </SemiContainer>
@@ -226,8 +264,7 @@ function PharmDetailed({ route, navigation }) {
           >
             <FontAwesome5
               name={showUpdate ? 'chevron-up' : 'chevron-down'}
-              size={25}
-              color={theme.text}
+              style={styles.icon}
             />
           </TouchableOpacity>
         </SemiContainer>
@@ -259,8 +296,7 @@ function PharmDetailed({ route, navigation }) {
           >
             <FontAwesome5
               name={showHowToStore ? 'chevron-up' : 'chevron-down'}
-              size={25}
-              color={theme.text}
+              style={styles.icon}
             />
           </TouchableOpacity>
         </SemiContainer>
@@ -292,8 +328,7 @@ function PharmDetailed({ route, navigation }) {
           >
             <FontAwesome5
               name={showCaution ? 'chevron-up' : 'chevron-down'}
-              size={25}
-              color={theme.text}
+              style={styles.icon}
             />
           </TouchableOpacity>
         </SemiContainer>
@@ -325,8 +360,7 @@ function PharmDetailed({ route, navigation }) {
           >
             <FontAwesome5
               name={showEffect ? 'chevron-up' : 'chevron-down'}
-              size={25}
-              color={theme.text}
+              style={styles.icon}
             />
           </TouchableOpacity>
         </SemiContainer>
@@ -345,10 +379,37 @@ function PharmDetailed({ route, navigation }) {
           </SemiContainer>
         ) : null}
 
-        <SemiTitle style={styles.semiTitle}>주성분</SemiTitle>
-        <Content style={styles.text}>{drugInfo.mainINGR}</Content>
-        <SemiTitle style={styles.semiTitle}>복용방법 및 섭취량</SemiTitle>
-        <Content style={styles.text}>{drugInfo.howMuch.substring(6)}</Content>
+        <SemiContainer>
+          <SemiTitle style={styles.semiTitle}>주성분</SemiTitle>
+          <TouchableOpacity
+            style={{
+              paddingRight: 4,
+              paddingLeft: 5,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            onPress={() => {
+              setShowINGR(prev => !prev);
+            }}
+          >
+            <FontAwesome5
+              name={showINGR ? 'chevron-up' : 'chevron-down'}
+              style={styles.icon}
+            />
+          </TouchableOpacity>
+        </SemiContainer>
+        {showINGR ? (
+          <SemiContainer
+            style={{
+              flexDirection: 'column',
+              flex: 1,
+              justifyContent: 'flex-start',
+              alignItems: 'flex-start',
+            }}
+          >
+            <Content style={styles.text}>{drugInfo.mainINGR}</Content>
+          </SemiContainer>
+        ) : null}
       </List>
     </Container>
   );

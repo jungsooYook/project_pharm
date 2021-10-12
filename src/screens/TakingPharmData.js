@@ -3,6 +3,8 @@ import styled from 'styled-components/native';
 import { useSelector } from 'react-redux';
 import PharmDataContent from '../components/PharmDataContent';
 import { dark, light } from '../theme';
+import RNShake from 'react-native-shake';
+import { Alert } from 'react-native';
 
 const Container = styled.SafeAreaView`
   justify-content: flex-start;

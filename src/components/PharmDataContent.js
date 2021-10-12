@@ -4,7 +4,7 @@ import { RemoveDrugInfo } from '../actions';
 import styled from 'styled-components/native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { DateConvert } from '../util';
+import { DateConvert } from '../utils';
 import * as Speech from 'expo-speech';
 
 const width = Dimensions.get('window').width;
@@ -128,8 +128,8 @@ const PharmDataContent = ({ drugInfo, namePress, style }) => {
 
   // long press function
   function longPress() {
-    Vibration.vibrate(50);
-    Speech.speak(name);
+    Vibration.vibrate(20);
+    Speech.speak(name, { pitch: 1, rate: 0.9 });
   }
 
   return (
