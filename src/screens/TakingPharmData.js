@@ -3,8 +3,7 @@ import styled from 'styled-components/native';
 import { useSelector } from 'react-redux';
 import PharmDataContent from '../components/PharmDataContent';
 import { dark, light } from '../theme';
-import RNShake from 'react-native-shake';
-import { Alert } from 'react-native';
+import DrugSearchButton from '../components/DrugSearchButton';
 
 const Container = styled.SafeAreaView`
   justify-content: flex-start;
@@ -72,7 +71,7 @@ function TakingPharmData({ navigation }) {
     <Container>
       <Title style={{ fontSize: bigTextMode ? 40 : 30 }}>복약 내역</Title>
       <Content
-        style={{ color: theme.caution, paddingTop: 20, paddingBottom: 0 }}
+        style={{ color: theme.caution, paddingTop: 10, paddingBottom: 10 }}
       >
         빨간색으로 뜨는 약물은 복용시 주의가 필요한 약물입니다.
       </Content>
@@ -101,6 +100,7 @@ function TakingPharmData({ navigation }) {
               />
             ))}
       </List>
+      <DrugSearchButton />
     </Container>
   );
 }

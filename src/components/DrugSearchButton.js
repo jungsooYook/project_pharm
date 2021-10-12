@@ -15,7 +15,7 @@ const Container = styled.TouchableOpacity`
   margin-right: 10px
   position: absolute
   right: 20px;
-  bottom: 60px;
+  bottom: 30px;
 `;
 
 const Title = styled.Text`
@@ -29,9 +29,9 @@ function longPress() {
   Speech.speak('약물 이름으로 검색합니다', { rate: 0.9 });
 }
 
-function DrugSearchButton() {
+function DrugSearchButton({ onPress }) {
   return (
-    <Container delayLongPress={300} onLongPress={longPress}>
+    <Container delayLongPress={300} onLongPress={longPress} onPress={onPress}>
       <FontAwesome name="search" size={20} />
     </Container>
   );

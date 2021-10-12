@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Text, Alert, Vibration, Dimensions } from 'react-native';
+import {
+  Text,
+  Alert,
+  Vibration,
+  Dimensions,
+  View,
+  StyleSheet,
+  Pressable,
+  TextInput,
+} from 'react-native';
 import styled from 'styled-components/native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import ResetButton from '../components/ResetButton';
@@ -8,7 +17,6 @@ import { AddDrugInfo } from '../actions';
 import OverlayView from '../components/OverlayView';
 import { EditPharmData, EditPharmName } from '../utils';
 import secret from '../data/secret.json';
-import DrugSearchButton from '../components/DrugSearchButton';
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -207,6 +215,12 @@ function ScanQRcode({ navigation }) {
     return <Text>No access to camera</Text>;
   }
 
+  function _onchangeText(drugSearchText) {
+    setDrugSearchText(drugSearchText);
+  }
+
+  // Search drug by drug name function
+
   /// Rendering Start
   return (
     <Container>
@@ -223,9 +237,54 @@ function ScanQRcode({ navigation }) {
       {scanned && (
         <ResetButton onPress={() => setScanned(false)} title="다시스캔" />
       )}
-      <DrugSearchButton />
     </Container>
   );
 }
+
+const styles = StyleSheet.create({
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    width: 400,
+    height: 300,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: '#F194FF',
+  },
+  buttonClose: {
+    backgroundColor: '#2196F3',
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+});
 
 export default ScanQRcode;
