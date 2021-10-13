@@ -100,7 +100,11 @@ function TakingPharmData({ navigation }) {
               />
             ))}
       </List>
-      <DrugSearchButton />
+      <DrugSearchButton
+        onPress={() => {
+          navigation.navigate('DrugSearchByName');
+        }}
+      />
     </Container>
   );
 }
