@@ -163,6 +163,7 @@ function PharmDetailed({ route, navigation }) {
             }`}
           </Content>
         ) : null}
+
         <SemiTitle style={styles.semiTitle}>약물명</SemiTitle>
         <Content style={styles.text}>{drugInfo.name}</Content>
 
