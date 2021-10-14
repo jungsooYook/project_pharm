@@ -88,9 +88,6 @@ function ScanQRcode({ navigation }) {
           return response.json();
         })
         .then(json => {
-          console.log(`std of name: ${data.name}`);
-          console.log(`std of barcode: ${data.barcode}`);
-
           data.StdCode = json.StdCode;
           data.ATCcode = json.ATCCode;
           data.PregnantGrade = json.PregnantGrade;
@@ -101,8 +98,6 @@ function ScanQRcode({ navigation }) {
           data.ChildNote = json.ChildNote;
           data.MaxInjectDay = json.MaxInjectDay;
           data.MaxDayCapacity = json.MaxDayCapacity;
-
-          console.log('std of stdcode: ', data.StdCode);
 
           SearchMoreData(data);
         });
@@ -164,22 +159,6 @@ function ScanQRcode({ navigation }) {
             caution: EditPharmData(myJson.body.items[0].NB_DOC_DATA),
             brandName: myJson.body.items[0].ENTP_NAME,
             updateInfo: myJson.body.items[0].GBN_NAME,
-            // dataStdCode: '',
-            // ATCcode: '',
-            // PregnantGrade: '',
-            // PregnantNote: '',
-            // ElderNote: '',
-            // ChildAge: '',
-            // ChildRange: '',
-            // ChildNote: '',
-            // MaxInjectDay: '',
-            // MaxDayCapacity: '',
-            // CombTarget: '',
-            // CombNote: '',
-            // CombCount: '',
-            // EffectGroup: '',
-            // EffectTarget: '',
-            // DuplicationCount: '',
           };
 
           return CheckDrugAlert(drugInfo);
@@ -216,7 +195,7 @@ function ScanQRcode({ navigation }) {
     SearchDrugByBarCode(editedData);
 
     console.log(
-      `@@@ScanQRcode screen data@@@\nbarcode type: ${type}\nbarcode data:${editedData}\n-----------------------------------`,
+      `@@@ScanQRcode screen data@@@\nbarcode type: ${type}\nbarcode data:${editedData}\n------------------`,
     );
     setScanned(true);
   };

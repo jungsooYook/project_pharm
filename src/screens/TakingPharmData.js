@@ -45,19 +45,6 @@ function TakingPharmData({ navigation }) {
     return state.drugInfo;
   });
 
-  //Search forbidden drug function
-  const SearchForbiddenDrug = async data => {
-    try {
-      await fetch(`https://${firebase_forbidden_drugg}/${data}/.json`)
-        .then(response => {
-          return response.json();
-        })
-        .then(json => {
-          return json.ForbiddenDrug;
-        });
-    } catch (e) {}
-  };
-
   const { bigTextMode, darkmode } = useSelector(state => {
     return {
       bigTextMode: state.settingInfo.bigTextMode,

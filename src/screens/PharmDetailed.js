@@ -86,6 +86,7 @@ function PharmDetailed({ route, navigation }) {
         });
     } catch (e) {
       console.log(e.message);
+      console.log('drug image search 부분에서 에러 발생');
       return setUrl('');
     }
   };
@@ -243,6 +244,11 @@ function PharmDetailed({ route, navigation }) {
             {drugInfo.ATCcode === 'nan' ? null : (
               <Content style={styles.text}>
                 ATC 코드: {drugInfo.ATCcode}
+              </Content>
+            )}
+            {drugInfo.INGRCode == null ? null : (
+              <Content style={styles.text}>
+                주성분 코드: {drugInfo.INGRCode}
               </Content>
             )}
           </SemiContainer>

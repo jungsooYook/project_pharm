@@ -5,6 +5,7 @@ import { MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
 
 import { dark, light } from '../theme';
 import { useSelector } from 'react-redux';
+import { Alert } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 

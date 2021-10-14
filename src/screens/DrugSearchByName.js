@@ -65,7 +65,7 @@ function DrugSearchByName({ navigation }) {
           return setDrugNames(result);
         });
     } catch (e) {
-      return console.log('에러발생');
+      return console.log('이름으로 약이름 검색 함수 에러 발생');
     }
   };
 
