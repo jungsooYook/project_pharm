@@ -44,8 +44,20 @@ function ScanQRcode({ navigation }) {
     };
   });
 
-  // Search StdCode from edited barcode function
+  // check drug ingrediant
+  const BarCodeToINGRCode = async data => {
+    await fetch(`${secret.drug_ingr_code_key}/${data.barcode}/.json`)
+      .then(response => {
+        return response.json();
+      })
+      .then(json => {
+        data.INGRCode = json.INGRCode;
 
+        dispatch(AddDrugInfo(data));
+      });
+  };
+
+  // Check combination caution drug
   const SearchMoreData = async data => {
     try {
       await fetch(`${secret.drug_information_key2}/${data.StdCode}/.json`)
@@ -60,7 +72,7 @@ function ScanQRcode({ navigation }) {
           data.EffectTarget = json.EffectTarget;
           data.DuplicationCount = json.DuplicationCount;
 
-          dispatch(AddDrugInfo(data));
+          BarCodeToINGRCode(data);
         });
     } catch (e) {
       console.log(e.message);
@@ -68,6 +80,7 @@ function ScanQRcode({ navigation }) {
     }
   };
 
+  // convert barcode to standard code
   const SearchStdCode = async data => {
     try {
       await fetch(`${secret.drug_information_key1}/${data.barcode}/.json`)
@@ -151,22 +164,22 @@ function ScanQRcode({ navigation }) {
             caution: EditPharmData(myJson.body.items[0].NB_DOC_DATA),
             brandName: myJson.body.items[0].ENTP_NAME,
             updateInfo: myJson.body.items[0].GBN_NAME,
-            dataStdCode: '',
-            ATCcode: '',
-            PregnantGrade: '',
-            PregnantNote: '',
-            ElderNote: '',
-            ChildAge: '',
-            ChildRange: '',
-            ChildNote: '',
-            MaxInjectDay: '',
-            MaxDayCapacity: '',
-            CombTarget: '',
-            CombNote: '',
-            CombCount: '',
-            EffectGroup: '',
-            EffectTarget: '',
-            DuplicationCount: '',
+            // dataStdCode: '',
+            // ATCcode: '',
+            // PregnantGrade: '',
+            // PregnantNote: '',
+            // ElderNote: '',
+            // ChildAge: '',
+            // ChildRange: '',
+            // ChildNote: '',
+            // MaxInjectDay: '',
+            // MaxDayCapacity: '',
+            // CombTarget: '',
+            // CombNote: '',
+            // CombCount: '',
+            // EffectGroup: '',
+            // EffectTarget: '',
+            // DuplicationCount: '',
           };
 
           return CheckDrugAlert(drugInfo);
@@ -218,8 +231,6 @@ function ScanQRcode({ navigation }) {
   function _onchangeText(drugSearchText) {
     setDrugSearchText(drugSearchText);
   }
-
-  // Search drug by drug name function
 
   /// Rendering Start
   return (

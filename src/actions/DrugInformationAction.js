@@ -30,6 +30,7 @@ export const AddDrugInfo = drugInfo => {
       EffectGroup: drugInfo.EffectGroup,
       EffectTarget: drugInfo.EffectTarget,
       DuplicationCount: drugInfo.DuplicationCount,
+      INGRCode: drugInfo.INGRCode,
     },
   };
 };
