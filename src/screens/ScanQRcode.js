@@ -111,7 +111,7 @@ function ScanQRcode({ navigation }) {
     Alert.alert(
       '복용 약물이 아래 내용이 맞습니까?',
       `복약 시간: ${timestamp()}
-      의약품명: ${data.name}
+      약물명: ${data.name}
       `,
       [
         {

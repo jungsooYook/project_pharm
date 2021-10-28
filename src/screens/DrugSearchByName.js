@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components/native';
 import { Alert, Dimensions, Text } from 'react-native';
 import secret from '../data/secret.json';
+import { EditPharmName } from '../utils';
 
 const width = Dimensions.get('window').width;
 
@@ -17,8 +19,30 @@ const Container = styled.SafeAreaView`
   align-items: center;
 `;
 
+const ScrollContainer = styled.ScrollView`
+  flex: 1;
+  margin-top: 20px;
+`;
+
+const ContentBox = styled.TouchableOpacity`
+  flex: 1;
+  height: 50px;
+  width: ${width - 30}px;
+  border-radius: 15px;
+  background-color: lightgray;
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+`;
+
+const ContentText = styled.Text`
+  font-size: 20px;
+  color: black;
+`;
+
 const TextInputBox = styled.TextInput`
-  flex;1;
   width: ${width - 110}px
   height:50px;
   border-radius:15px;
@@ -49,11 +73,61 @@ const SearchButtonTouch = styled.TouchableOpacity`
 function DrugSearchByName({ navigation }) {
   const [text, setText] = useState('');
   const [drugNames, setDrugNames] = useState([]);
+  const { bigTextMode, darkmode } = useSelector(state => {
+    return {
+      bigTextMode: state.settingInfo.bigTextMode,
+      darkmode: state.settingInfo.darkmode,
+    };
+  });
+
+  // 약물 이름 길이 수정 함수
+  function PharmNameset(data) {
+    if (width < 600) {
+      if (bigTextMode == true) {
+        if (data.length >= 6) {
+          return `${data.substring(0, 6)}..`;
+        } else {
+          return data;
+        }
+      } else {
+        if (data.length >= 20) {
+          return `${data.substring(0, 20)}..`;
+        } else {
+          return data;
+        }
+      }
+    } else {
+      return data;
+    }
+  }
+
+  // 약물 누를시 알람 설정
+  function PressDrugName(data) {
+    Alert.alert(
+      '해당 약물을 추가하시겠습니까?',
+      `약물명: ${EditPharmName(data.ITEM_NAME)}`,
+      [
+        {
+          text: '아니요',
+          onPress: () => {
+            console.log('Cancel Pressed');
+          },
+          style: 'cancel',
+        },
+        {
+          text: '네',
+          onPress: () => {
+            console.log('OK Pressed');
+          },
+        },
+      ],
+    );
+  }
 
   const SearchDrugName = async data => {
     try {
       await fetch(
-        `${secret.search_drug_name_key}&item_name=${data}&order=Y&pageNo=1&numOfRows=100&type=json`,
+        `${secret.search_drug_name_key}&item_name=${data}&spclty_pblc=의약품&order=Y&pageNo=1&numOfRows=100&type=json`,
       )
         .then(response => {
           return response.json();
@@ -65,7 +139,7 @@ function DrugSearchByName({ navigation }) {
           return setDrugNames(result);
         });
     } catch (e) {
-      return console.log('이름으로 약이름 검색 함수 에러 발생');
+      return console.log('Error in Searching drug by name');
     }
   };
 
@@ -75,9 +149,8 @@ function DrugSearchByName({ navigation }) {
         <TextInputBox
           onChangeText={setText}
           value={text}
-          // blurOnSubmit={Alert.alert('blurOnSubmit')}
           onSubmitEditing={() => {
-            Alert.alert('submit');
+            SearchDrugName(text);
           }}
           placeholder="약물명을 입력하세요."
         />
@@ -89,9 +162,22 @@ function DrugSearchByName({ navigation }) {
           <TextContainer>검색</TextContainer>
         </SearchButtonTouch>
       </SearchContainer>
-      {drugNames.map(info => (
-        <Text key={info.ITEM_SEQ}>{info.ITEM_NAME}</Text>
-      ))}
+      <ScrollContainer>
+        {drugNames
+          ? drugNames.map(info => (
+              <ContentBox
+                key={info.ITEM_SEQ}
+                onPress={() => {
+                  PressDrugName(info);
+                }}
+              >
+                <ContentText>
+                  {PharmNameset(EditPharmName(info.ITEM_NAME))}
+                </ContentText>
+              </ContentBox>
+            ))
+          : null}
+      </ScrollContainer>
     </Container>
   );
 }
